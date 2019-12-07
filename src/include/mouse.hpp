@@ -9,45 +9,23 @@
 class mouse : public property
 {
 private:
+    int sourceX, sourceY;
     int xmp, ymp;
+    int deltaX, deltaY;
+
+    bool mouseClick;
 
 public:
     mouse(PropertyControlSystem *pcs);
     ~mouse();
 
+    void setCoursor(int x, int y);
+
     int getx();
     int gety();
 
+    bool isClicked();
+
     void update();
-    void draw();
+    void draw() {}
 };
-
-mouse::mouse(PropertyControlSystem *pcs)
-{
-}
-
-mouse::~mouse()
-{
-}
-
-void mouse::draw()
-{
-}
-
-void mouse::update()
-{
-    if (game::event.type == SDL_MOUSEMOTION)
-    {
-        SDL_GetGlobalMouseState(&xmp, &ymp);
-    }
-}
-
-int mouse::getx()
-{
-    return xmp;
-}
-
-int mouse::gety()
-{
-    return ymp;
-}
