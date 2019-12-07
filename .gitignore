@@ -1,0 +1,8 @@
+
+dep/
+
+build/
+
+bin/
+
+\.vscode/
