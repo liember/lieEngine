@@ -27,6 +27,9 @@ public:
     double getX();
     double getY();
 
+    double getOnlyX();
+    double getOnlyY();
+
     void setX(double dx);
     void setY(double dy);
 
