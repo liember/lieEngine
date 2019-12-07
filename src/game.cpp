@@ -19,18 +19,9 @@
 using namespace std;
 
 SDL_Renderer *game::renderer = nullptr;
+SDL_Window *game::window = nullptr;
+
 SDL_Event game::event;
-
-int points = 5;
-
-void game::initGame()
-{
-    gameobj *obj = new gameobj();
-    obj->addProperty(PROPERTY_POSITION);
-    obj->addProperty(PROPERTY_SPEED);
-    textureProperty *t = new textureProperty(obj);
-    t->setTexture("assets/bird.png");
-}
 
 game::game(/* args */) {}
 
@@ -38,6 +29,7 @@ game::~game() {}
 
 void game::initEngine(const char *title, int xpos, int ypos, int width, int height, bool windowed)
 {
+
     h = height;
     w = width;
 
@@ -74,6 +66,8 @@ void game::initEngine(const char *title, int xpos, int ypos, int width, int heig
     {
         isrunning = false;
     }
+
+    initGame();
 }
 
 void game::handleevents()
@@ -97,20 +91,8 @@ void game::update()
 {
     gtimer->FrameTimeout();
     gtimer->deltaUpdate();
-
-    gameobj *obj = gmsManager.get("kaktus");
-    static_cast<positionProperty *>(obj->getProperty(PROPERTY_SPEED))->setX(points * -10);
-    positionProperty *pos = static_cast<positionProperty *>(obj->getProperty(PROPERTY_POSITION));
-    if (pos->getX() < -100)
-    {
-        if (points < 30)
-        {
-            points++;
-        }
-
-        pos->setX(900);
-    }
     gmsManager.update();
+    updateGame();
 }
 
 void game::render()
@@ -136,4 +118,9 @@ bool game::running()
 SDL_Renderer *game::getRenderer()
 {
     return renderer;
+}
+
+SDL_Window *game::getWindow()
+{
+    return window;
 }

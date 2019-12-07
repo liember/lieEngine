@@ -16,17 +16,20 @@ private:
 
     int w, h;
 
-    SDL_Window *window;
+    static SDL_Window *window;
     static SDL_Renderer *renderer;
 
     objectsManager gmsManager;
 
+    void updateGame();
+    void initGame();
+
 public:
     timer *gtimer;
+    static SDL_Window *getWindow();
     static SDL_Renderer *getRenderer();
     static SDL_Event event;
 
-    void initGame();
     void initEngine(const char *title,
                     int xpos, int ypos,
                     int width, int height,
