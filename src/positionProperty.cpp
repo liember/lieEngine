@@ -6,8 +6,10 @@
 double positionProperty::gx = 0;
 double positionProperty::gy = 0;
 
-positionProperty::positionProperty(PropertyControlSystem *pcs) : x(0), y(0), property(PROPERTY_POSITION)
+positionProperty::positionProperty(PropertyControlSystem *pcs) : property(PROPERTY_POSITION)
 {
+    x = 0;
+    y = 0;
     useglobalxy = true;
     std::cout << "[?] New position property added" << std::endl;
 }
@@ -20,11 +22,7 @@ positionProperty::~positionProperty()
 
 void positionProperty::update()
 {
-    if (useglobalxy)
-    {
-        x = gx + x;
-        y = gy + y;
-    }
+    std::cout << gx << " " << gy << std::endl;
 }
 
 void positionProperty::setGlobal(double ix, double iy)
@@ -50,10 +48,29 @@ double positionProperty::getGY()
 
 double positionProperty::getX()
 {
+    if (useglobalxy)
+    {
+        return x + gx;
+    }
+
     return x;
 }
 
 double positionProperty::getY()
+{
+    if (useglobalxy)
+    {
+        return y + gy;
+    }
+    return y;
+}
+
+double positionProperty::getOnlyX()
+{
+    return x;
+}
+
+double positionProperty::getOnlyY()
 {
     return y;
 }
