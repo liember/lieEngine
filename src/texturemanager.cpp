@@ -4,10 +4,11 @@
 #include <SDL2/SDL_image.h>
 
 #include "include/pcs.hpp"
-
 #include "include/game.hpp"
+#include "include/exeptions.hpp"
 
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -19,8 +20,17 @@ texturemanager::~texturemanager()
 {
 }
 
+void texturemanager::checkFile(const char *file_name)
+{
+    ifstream file;
+    file.open(file_name);
+    if (!file)
+        throw new fileNotExist();
+}
+
 SDL_Texture *texturemanager::loadTexture(const char *filename)
 {
+    checkFile(filename);
     cout << "[?] Load texture" << filename << endl;
     SDL_Surface *tempSurf = IMG_Load(filename);
     SDL_Texture *tex = SDL_CreateTextureFromSurface(game::getRenderer(), tempSurf);
