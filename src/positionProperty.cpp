@@ -11,7 +11,6 @@ positionProperty::positionProperty(PropertyControlSystem *pcs) : property(PROPER
     x = 0;
     y = 0;
     useglobalxy = true;
-    std::cout << "[?] New position property added" << std::endl;
 }
 
 void positionProperty::draw() {}
@@ -22,7 +21,6 @@ positionProperty::~positionProperty()
 
 void positionProperty::update()
 {
-    std::cout << gx << " " << gy << std::endl;
 }
 
 void positionProperty::setGlobal(double ix, double iy)
