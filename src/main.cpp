@@ -5,7 +5,7 @@ int main()
 {
     game *gae = nullptr;
     gae = new game();
-    gae->initEngine("lie and ember", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+    gae->initEngine("lie and ember", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 600, false);
     try
     {
         while (gae->running())
