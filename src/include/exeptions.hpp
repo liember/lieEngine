@@ -25,3 +25,15 @@ public:
         return "[!] File does not exist or path specified";
     }
 };
+
+class zeroRadius : public std::exception
+{
+private:
+    std::string info;
+
+public:
+    virtual const char *what() const throw()
+    {
+        return "[!] Radius is zero";
+    }
+};
