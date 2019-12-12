@@ -23,6 +23,8 @@ private:
 
     void updateGame();
     void initGame();
+    void specificRenderBefore();
+    void specificRenderAfter();
 
 public:
     timer *gtimer;
