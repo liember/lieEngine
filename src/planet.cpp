@@ -5,6 +5,10 @@ planet::planet(/* args */) : size(100)
     mass = 59722;
     pos = new positionProperty(this);
     connectProperty(pos);
+    text = new textProperty(this);
+    connectProperty(text);
+    text->init("loading...");
+    text->SetSize(60, 20);
     vel = new speedProperty(this);
     connectProperty(vel);
     tex = new textureProperty(this);

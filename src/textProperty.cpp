@@ -28,9 +28,14 @@ void textProperty::update()
 
 void textProperty::draw()
 {
+    SDL_Rect buf;
+    buf.x = pos->getX();
+    buf.y = pos->getY() - 50;
+    buf.w = dstrect.w;
+    buf.h = dstrect.h;
     if (texture)
     {
-        texturemanager::draw(texture, dstrect);
+        texturemanager::draw(texture, buf);
     }
 }
 

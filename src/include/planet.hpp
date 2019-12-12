@@ -9,6 +9,7 @@ private:
     speedProperty *vel;
     textureProperty *tex;
     colliderProperty *col;
+    textProperty *text;
 
     double mass;
     int size;
