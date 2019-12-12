@@ -15,6 +15,7 @@
 #include "include/WASDControllerProperty.hpp"
 #include "include/tilemapProperty.hpp"
 #include "include/textureProperty.hpp"
+#include "include/colliderProperty.hpp"
 
 #include "include/planet.hpp"
 

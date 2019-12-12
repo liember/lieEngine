@@ -1,6 +1,6 @@
 #include "includer.hpp"
 
-planet::planet(/* args */)
+planet::planet(/* args */) : size(100)
 {
     mass = 59722;
     pos = new positionProperty(this);
@@ -10,6 +10,11 @@ planet::planet(/* args */)
     tex = new textureProperty(this);
     tex->setTexture("assets/b2.png");
     connectProperty(tex);
+    col = new colliderProperty(this);
+    col->setDraw(true);
+    col->setBody(size, size);
+    connectProperty(col);
+    gravity = true;
 }
 
 planet::~planet()
@@ -45,4 +50,31 @@ double planet::getPosY()
 void planet::addVel(double x, double y)
 {
     vel->set(vel->getX() + x, vel->getY() + y);
+}
+
+void planet::setMass(double val)
+{
+    mass = val;
+}
+
+void planet::setSize(int s)
+{
+    size = s;
+    col->setBody(s, s);
+    tex->setTextureSize(s);
+}
+
+void planet::collide()
+{
+    PropertyControlSystem *c = col->findCollision();
+    if (c != nullptr)
+    {
+        std::cout << "lol" << std::endl;
+        vel->set(0, 0);
+    }
+}
+
+bool planet::isGravit()
+{
+    return gravity;
 }
