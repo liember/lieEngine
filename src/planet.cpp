@@ -47,6 +47,16 @@ double planet::getPosY()
     return pos->getOnlyY();
 }
 
+double planet::getGlobX()
+{
+    return pos->getX();
+}
+
+double planet::getGlobY()
+{
+    return pos->getY();
+}
+
 void planet::addVel(double x, double y)
 {
     vel->set(vel->getX() + x, vel->getY() + y);
@@ -69,7 +79,7 @@ void planet::collide()
     PropertyControlSystem *c = col->findCollision();
     if (c != nullptr)
     {
-        std::cout << "lol" << std::endl;
+
         vel->set(0, 0);
     }
 }
@@ -77,4 +87,9 @@ void planet::collide()
 bool planet::isGravit()
 {
     return gravity;
+}
+
+void planet::setTex(const char *p)
+{
+    tex->setTexture(p);
 }

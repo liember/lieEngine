@@ -26,13 +26,16 @@ public:
     bool isGravit();
 
     void setSize(int s);
+    int getSize() { return size; }
 
     double getPosX();
     double getPosY();
 
-    void collide();
+    double getGlobX();
+    double getGlobY();
 
-    void updateCollisions();
+    void collide();
+    void setTex(const char *p);
 
     planet(/* args */);
     ~planet();
