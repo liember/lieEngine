@@ -10,10 +10,10 @@ positionLimitProperty::positionLimitProperty(PropertyControlSystem *pcs) : prope
     std::cout << "[?] New position limit property added" << std::endl;
     pos = static_cast<positionProperty *>(pcs->getProperty(PROPERTY_POSITION));
     vel = static_cast<speedProperty *>(pcs->getProperty(PROPERTY_SPEED));
-    limYbot = new double(0);
-    limYtop = new double(0);
-    limXleft = new double(0);
-    limXriht = new double(0);
+    limYbot = new double(99999999999999999);
+    limYtop = new double(-99999999999999999);
+    limXleft = new double(-99999999999999999);
+    limXriht = new double(99999999999999999);
 }
 
 positionLimitProperty::~positionLimitProperty()
