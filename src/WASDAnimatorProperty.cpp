@@ -10,9 +10,8 @@
 
 WASDAnimatorProperty::WASDAnimatorProperty(PropertyControlSystem *pcs) : property(PROPERY_WASD_ANIMATOR)
 {
-    speed = 100;
-    inertion = false;
-    lim = static_cast<positionLimitProperty *>(pcs->getProperty(PROPERTY_POSITION_LIMIT));
+    speed = 0.1;
+    inertion = true;
     vel = static_cast<speedProperty *>(pcs->getProperty(PROPERTY_SPEED));
     controller = static_cast<WASDControllerProperty *>(pcs->getProperty(PROPERTY_WASD_CONTROLLER));
     pos = static_cast<positionProperty *>(pcs->getProperty(PROPERTY_POSITION));
@@ -37,10 +36,7 @@ void WASDAnimatorProperty::update()
 
     if (controller->getStates()[SPACE_KEY])
     {
-        if (lim->nearBot())
-        {
-            moveVertical(-200);
-        }
+        moveVertical(-200);
     }
 
     if (controller->getStates()[W_KEY])
