@@ -9,7 +9,13 @@ SDL_Event game::event;
 
 game::game(/* args */) {}
 
-game::~game() {}
+game::~game()
+{
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+    TTF_Quit();
+}
 
 void game::initEngine(const char *title, int xpos, int ypos, int width, int height, bool windowed)
 {
@@ -28,6 +34,7 @@ void game::initEngine(const char *title, int xpos, int ypos, int width, int heig
 
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
+        TTF_Init();
         cout << "[?] subsystem inited" << endl;
 
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
@@ -82,7 +89,9 @@ void game::update()
 void game::render()
 {
     SDL_RenderClear(renderer);
+    specificRenderBefore();
     gmsManager.draw();
+    specificRenderAfter();
     SDL_RenderPresent(renderer);
 }
 
