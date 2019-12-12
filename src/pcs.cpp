@@ -1,19 +1,4 @@
-#include "include/pcs.hpp"
-#include "include/property.hpp"
-
-#include "include/positionProperty.hpp"
-#include "include/positionLimitProperty.hpp"
-#include "include/speedProperty.hpp"
-#include "include/textureProperty.hpp"
-#include "include/WASDAnimatorProperty.hpp"
-#include "include/WASDControllerProperty.hpp"
-#include "include/tilemapProperty.hpp"
-#include "include/mouse.hpp"
-#include "include/cameraProperty.hpp"
-
-#include "include/exeptions.hpp"
-
-#include <iostream>
+#include "includer.hpp"
 
 void PropertyControlSystem::update()
 {
@@ -143,6 +128,9 @@ property *PropertyControlSystem::create(int id)
         break;
     case PROPERY_WASD_ANIMATOR:
         return new WASDAnimatorProperty(this);
+        break;
+    case PROPERY_TEXT:
+        return new textProperty(this);
         break;
     default:
         return nullptr;

@@ -1,7 +1,7 @@
 #pragma once
 
 //ну я хз как это без макроса мудрить
-#define OVERAL_PROPERTIES 10
+#define OVERAL_PROPERTIES 11
 
 #define PROPERTY_POSITION 0
 #define PROPERTY_TEXTURE 1
@@ -14,6 +14,7 @@
 #define PROPERTY_POSITION_LIMIT 8
 #define PROPERTY_MOUSE 9
 #define PROPERY_WASD_ANIMATOR 10
+#define PROPERY_TEXT 11
 
 class property
 {
