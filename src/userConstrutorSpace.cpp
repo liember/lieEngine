@@ -6,6 +6,8 @@ positionProperty *pos;
 speedProperty *vel;
 textureProperty *tex;
 positionLimitProperty *lim;
+textProperty *text;
+buttonProperty *but;
 
 //planets
 planet *pl[10];
@@ -14,17 +16,30 @@ double gravity = 0.00001;
 
 void game::initGame()
 {
+    //############ menu ##############
+
+    gameobj *quitB = new gameobj();
+    pos = new positionProperty(quitB);
+    pos->setX(30);
+    pos->setY(580);
+    quitB->connectProperty(pos);
+    text = new textProperty(quitB);
+    quitB->connectProperty(text);
+    but = new buttonProperty(quitB);
+    quitB->connectProperty(but);
+    text->init("Quit");
+    but->setSize(200, 60);
+    gmsManager.add(quitB);
+
+    //############ menu ##############
+
     playerShip *pla = new playerShip();
     pla->setPos(900, 250);
     pla->setTex("assets/bird.png");
-    pla->setVel(0, 200);
+    pla->setVel(30, 200);
     pla->setMass(9);
-    pla->setSize(100);
+    pla->setSize(50);
     gmsManager.add(pla);
-
-    obj = new gameobj();
-    obj->addProperty(PROPERTY_TILEMAP);
-    gmsManager.add(obj);
 
     pl[0] = new planet();
     pl[0]->setPos(400, 250);

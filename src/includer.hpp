@@ -28,6 +28,7 @@
 #include "include/textureProperty.hpp"
 #include "include/colliderProperty.hpp"
 #include "include/cameraProperty.hpp"
+#include "include/buttonProperty.hpp"
 
 #include "include/planet.hpp"
 #include "include/playerShip.hpp"

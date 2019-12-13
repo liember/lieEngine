@@ -18,6 +18,8 @@ public:
     void update();
     void draw();
 
+    void setGUsing(bool b);
+
     void enableGlobal(bool v);
 
     static void setGlobal(double ix, double iy);

@@ -18,9 +18,7 @@ void mouse::update()
 {
     if (game::event.type == SDL_MOUSEMOTION)
     {
-        SDL_GetGlobalMouseState(&xmp, &ymp);
-        xmp -= sourceX;
-        ymp -= sourceY;
+        SDL_GetMouseState(&xmp, &ymp);
     }
     if (game::event.type == SDL_MOUSEBUTTONDOWN)
     {

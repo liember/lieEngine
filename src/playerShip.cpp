@@ -6,6 +6,8 @@ playerShip::playerShip(/* args */)
     connectProperty(wasdh);
     wasd = new WASDAnimatorProperty(this);
     connectProperty(wasd);
+    setText("Player");
+    setSize(50);
 }
 
 playerShip::~playerShip()

@@ -13,6 +13,11 @@ positionProperty::positionProperty(PropertyControlSystem *pcs) : property(PROPER
     useglobalxy = true;
 }
 
+void positionProperty::setGUsing(bool b)
+{
+    useglobalxy = b;
+}
+
 void positionProperty::draw() {}
 
 positionProperty::~positionProperty()

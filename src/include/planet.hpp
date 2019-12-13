@@ -24,6 +24,8 @@ public:
     void setMass(double val);
     double getMass();
 
+    void setText(const char *t);
+
     bool isGravit();
 
     void setSize(int s);

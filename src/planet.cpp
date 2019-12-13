@@ -21,6 +21,11 @@ planet::planet(/* args */) : size(100)
     gravity = true;
 }
 
+void planet::setText(const char *t)
+{
+    text->init(t);
+}
+
 planet::~planet()
 {
 }

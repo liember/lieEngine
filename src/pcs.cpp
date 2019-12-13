@@ -132,6 +132,9 @@ property *PropertyControlSystem::create(int id)
     case PROPERY_TEXT:
         return new textProperty(this);
         break;
+    case PROPERTY_BUTTON:
+        return new buttonProperty(this);
+        break;
     default:
         return nullptr;
         break;
