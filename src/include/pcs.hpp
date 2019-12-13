@@ -7,7 +7,7 @@
 class PropertyControlSystem
 {
 private:
-    property *properties[11];
+    property *properties[OVERAL_PROPERTIES + 1];
 
     int getPropertyID(property *p);
     property *create(int id);
