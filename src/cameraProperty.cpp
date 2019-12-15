@@ -35,3 +35,8 @@ void camera::update()
         firsttap = true;
     }
 }
+
+void camera::set(double x, double y)
+{
+    pos->setGlobal(x, y);
+}
