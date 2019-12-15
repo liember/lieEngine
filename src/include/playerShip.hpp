@@ -9,6 +9,8 @@ private:
     WASDAnimatorProperty *wasd;
 
 public:
+    void setSpeed(double s);
+
     playerShip(/* args */);
     ~playerShip();
 };

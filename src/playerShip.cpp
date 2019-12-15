@@ -13,3 +13,8 @@ playerShip::playerShip(/* args */)
 playerShip::~playerShip()
 {
 }
+
+void playerShip::setSpeed(double s)
+{
+    wasd->setSpeed(s);
+}
