@@ -4,11 +4,16 @@ buttonProperty::buttonProperty(PropertyControlSystem *pcs)
 {
     delay = 0.1;
     time = 0;
+    fill = false;
     setID(PROPERTY_BUTTON);
     pos = static_cast<positionProperty *>(pcs->getProperty(PROPERTY_POSITION));
     m = static_cast<mouse *>(pcs->getProperty(PROPERTY_MOUSE));
-    text = static_cast<textProperty *>(pcs->getProperty(PROPERTY_TEXTURE));
+    text = static_cast<textProperty *>(pcs->getProperty(PROPERY_TEXT));
     pos->setGUsing(false);
+    but.h = 0;
+    but.w = 0;
+    but.x = 0;
+    but.y = 0;
 }
 
 buttonProperty::~buttonProperty()
