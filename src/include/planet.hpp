@@ -41,5 +41,6 @@ public:
     void setTex(const char *p);
 
     planet(/* args */);
+    planet(const char *name, int radius, double m, double spX, double spY, double x, double y, const char *t = "assets/b2.png");
     ~planet();
 };

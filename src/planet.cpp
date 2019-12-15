@@ -7,7 +7,7 @@ planet::planet(/* args */) : size(100)
     connectProperty(pos);
     text = new textProperty(this);
     connectProperty(text);
-    text->init("loading...");
+    text->init("undefined");
     text->SetSize(60, 20);
     vel = new speedProperty(this);
     connectProperty(vel);
@@ -16,6 +16,32 @@ planet::planet(/* args */) : size(100)
     connectProperty(tex);
     col = new colliderProperty(this);
     col->setDraw(true);
+    col->setBody(size, size);
+    connectProperty(col);
+    gravity = true;
+}
+
+planet::planet(const char *name, int radius, double m, double spX, double spY, double x, double y, const char *t)
+{
+    mass = m;
+    pos = new positionProperty(this);
+    pos->setX(x);
+    pos->setY(y);
+    connectProperty(pos);
+    text = new textProperty(this);
+    text->init(name);
+    connectProperty(text);
+    text->SetSize(60, 20);
+    vel = new speedProperty(this);
+    vel->set(spX, spY);
+    connectProperty(vel);
+    tex = new textureProperty(this);
+    tex->setTextureSize(size * 2);
+    tex->setTexture(t);
+    connectProperty(tex);
+    col = new colliderProperty(this);
+    col->setDraw(true);
+    size = radius * 2;
     col->setBody(size, size);
     connectProperty(col);
     gravity = true;
