@@ -20,6 +20,8 @@ public:
     void update();
     void draw() {}
 
+    void set(double x, double y);
+
     camera(PropertyControlSystem *pcs);
     ~camera();
 };
