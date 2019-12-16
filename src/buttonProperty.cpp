@@ -40,8 +40,12 @@ void buttonProperty::draw() {
     SDL_SetRenderDrawColor(game::getRenderer(), 80, 80, 80, 0);
     SDL_RenderFillRect(game::getRenderer(), &b);
     SDL_SetRenderDrawColor(game::getRenderer(), 0, 0, 0, 0);
-  }
+
+  }else{
+  SDL_SetRenderDrawColor(game::getRenderer(), 80, 80, 80, 0);
   SDL_RenderDrawRect(game::getRenderer(), &b);
+  SDL_SetRenderDrawColor(game::getRenderer(), 0, 0, 0, 0);
+  }
 }
 
 void buttonProperty::update() {
