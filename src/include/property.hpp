@@ -17,22 +17,21 @@
 #define PROPERY_TEXT 12
 #define PROPERTY_BUTTON 11
 
-class property
-{
+class property {
 private:
-    int id;
+  int id;
 
 public:
-    virtual void draw() = 0;
-    virtual void update() = 0;
+  virtual void draw() = 0;
+  virtual void update() = 0;
 
-    int getID();
-    void setID(int i);
+  int getID();
+  void setID(int i);
 
-    property *self();
+  property *self();
 
-    property();
-    property(int i);
-    property(const property &cp);
-    virtual ~property();
+  property();
+  property(int i);
+  property(const property &cp);
+  virtual ~property();
 };

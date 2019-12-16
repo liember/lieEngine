@@ -3,24 +3,23 @@
 #include <iostream>
 #include <vector>
 
-#include "property.hpp"
 #include "gameobj.hpp"
+#include "property.hpp"
 
-class objectsManager
-{
+class objectsManager {
 private:
-    std::vector<gameobj *> objekts;
+  std::vector<gameobj *> objekts;
 
 public:
-    void add(gameobj *p);
-    gameobj *get(const char *tag);
+  void add(gameobj *p);
+  gameobj *get(const char *tag);
 
-    void remove(gameobj *p);
+  void remove(gameobj *p);
 
-    void update();
-    void destroy();
-    void draw();
+  void update();
+  void destroy();
+  void draw();
 
-    objectsManager(/* args */);
-    ~objectsManager();
+  objectsManager(/* args */);
+  ~objectsManager();
 };

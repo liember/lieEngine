@@ -2,45 +2,45 @@
 
 #include "../includer.hpp"
 
-class planet : public gameobj
-{
+class planet : public gameobj {
 private:
-    positionProperty *pos;
-    speedProperty *vel;
-    textureProperty *tex;
-    colliderProperty *col;
-    textProperty *text;
+  positionProperty *pos;
+  speedProperty *vel;
+  textureProperty *tex;
+  colliderProperty *col;
+  textProperty *text;
 
-    double mass;
-    int size;
+  double mass;
+  int size;
 
-    bool gravity;
+  bool gravity;
 
 public:
-    void setPos(double x, double y);
-    void setVel(double x, double y);
-    void addVel(double x, double y);
+  void setPos(double x, double y);
+  void setVel(double x, double y);
+  void addVel(double x, double y);
 
-    void setMass(double val);
-    double getMass();
+  void setMass(double val);
+  double getMass();
 
-    void setText(const char *t);
+  void setText(const char *t);
 
-    bool isGravit();
+  bool isGravit();
 
-    void setSize(int s);
-    int getSize() { return size; }
+  void setSize(int s);
+  int getSize() { return size; }
 
-    double getPosX();
-    double getPosY();
+  double getPosX();
+  double getPosY();
 
-    double getGlobX();
-    double getGlobY();
+  double getGlobX();
+  double getGlobY();
 
-    void collide();
-    void setTex(const char *p);
+  void collide();
+  void setTex(const char *p);
 
-    planet(/* args */);
-    planet(const char *name, int radius, double m, double spX, double spY, double x, double y, const char *t = "assets/b2.png");
-    ~planet();
+  planet(/* args */);
+  planet(const char *name, int radius, double m, double spX, double spY,
+         double x, double y, const char *t = "assets/b2.png");
+  ~planet();
 };

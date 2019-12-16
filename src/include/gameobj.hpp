@@ -6,16 +6,15 @@
 #include "pcs.hpp"
 #include "property.hpp"
 
-class gameobj : public PropertyControlSystem
-{
+class gameobj : public PropertyControlSystem {
 private:
-    char *tag;
+  char *tag;
 
 public:
-    gameobj(const gameobj &gameobj);
+  gameobj(const gameobj &gameobj);
 
-    char *getTag();
-    gameobj(const char *name);
-    gameobj();
-    ~gameobj();
+  char *getTag();
+  gameobj(const char *name);
+  gameobj();
+  ~gameobj();
 };

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "pcs.hpp"
 #include "property.hpp"
 #include "speedProperty.hpp"
-#include "pcs.hpp"
 
 #define W_KEY 0
 #define A_KEY 1
@@ -10,17 +10,16 @@
 #define D_KEY 3
 #define SPACE_KEY 4
 
-class WASDControllerProperty : public property
-{
+class WASDControllerProperty : public property {
 private:
-    bool keyStates[3];
+  bool keyStates[3];
 
 public:
-    WASDControllerProperty(PropertyControlSystem *pcs);
-    ~WASDControllerProperty();
+  WASDControllerProperty(PropertyControlSystem *pcs);
+  ~WASDControllerProperty();
 
-    bool *getStates();
+  bool *getStates();
 
-    void update();
-    void draw();
+  void update();
+  void draw();
 };

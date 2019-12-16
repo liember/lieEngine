@@ -1,31 +1,30 @@
 #pragma once
 
-#include "property.hpp"
 #include "pcs.hpp"
+#include "property.hpp"
 
-#include <SDL2/SDL.h>
 #include "game.hpp"
+#include <SDL2/SDL.h>
 
-class mouse : public property
-{
+class mouse : public property {
 private:
-    int sourceX, sourceY;
-    int xmp, ymp;
-    int deltaX, deltaY;
+  int sourceX, sourceY;
+  int xmp, ymp;
+  int deltaX, deltaY;
 
-    bool mouseClick;
+  bool mouseClick;
 
 public:
-    mouse(PropertyControlSystem *pcs);
-    ~mouse();
+  mouse(PropertyControlSystem *pcs);
+  ~mouse();
 
-    void setCoursor(int x, int y);
+  void setCoursor(int x, int y);
 
-    int getx();
-    int gety();
+  int getx();
+  int gety();
 
-    bool isClicked();
+  bool isClicked();
 
-    void update();
-    void draw() {}
+  void update();
+  void draw() {}
 };

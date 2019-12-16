@@ -1,32 +1,32 @@
 #pragma once
 
 #include "../includer.hpp"
+#include "mouse.hpp"
 
-class buttonProperty : public property
-{
+class buttonProperty : public property {
 private:
-    positionProperty *pos;
-    SDL_Rect but;
-    mouse *m;
-    textProperty *text;
+  positionProperty *pos;
+  SDL_Rect but;
+  mouse *m;
+  textProperty *text;
 
-    int paddingX = 10;
-    int paddingY = 60;
+  int paddingX = 10;
+  int paddingY = 60;
 
-    double time;
-    double delay;
+  double time;
+  double delay;
 
-    bool fill;
+  bool fill;
 
 public:
-    buttonProperty(PropertyControlSystem *pcs);
-    ~buttonProperty();
+  buttonProperty(PropertyControlSystem *pcs);
+  ~buttonProperty();
 
-    bool isPressed();
+  bool isPressed();
 
-    void setSize(int w, int h);
-    void setPos(double x, double y);
+  void setSize(int w, int h);
+  void setPos(double x, double y);
 
-    void draw();
-    void update();
+  void draw();
+  void update();
 };

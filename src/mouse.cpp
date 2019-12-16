@@ -3,49 +3,32 @@
 
 #include <SDL2/SDL.h>
 
-mouse::mouse(PropertyControlSystem *pcs)
-{
+mouse::mouse(PropertyControlSystem *pcs) {
+  mouseClick = false;
+  setCoursor(0, 0);
+  SDL_GetMouseState(&sourceX, &sourceY);
+}
+
+mouse::~mouse() {}
+
+void mouse::update() {
+  if (game::event.type == SDL_MOUSEMOTION) {
+    SDL_GetMouseState(&xmp, &ymp);
+  }
+  if (game::event.type == SDL_MOUSEBUTTONDOWN) {
+    mouseClick = true;
+  }
+  if (game::event.type == SDL_MOUSEBUTTONUP) {
     mouseClick = false;
-    setCoursor(0, 0);
-    SDL_GetMouseState(&sourceX, &sourceY);
+  }
 }
 
-mouse::~mouse()
-{
+void mouse::setCoursor(int x, int y) {
+  SDL_WarpMouseInWindow(game::getWindow(), x, y);
 }
 
-void mouse::update()
-{
-    if (game::event.type == SDL_MOUSEMOTION)
-    {
-        SDL_GetMouseState(&xmp, &ymp);
-    }
-    if (game::event.type == SDL_MOUSEBUTTONDOWN)
-    {
-        mouseClick = true;
-    }
-    if (game::event.type == SDL_MOUSEBUTTONUP)
-    {
-        mouseClick = false;
-    }
-}
+int mouse::getx() { return xmp; }
 
-void mouse::setCoursor(int x, int y)
-{
-    SDL_WarpMouseInWindow(game::getWindow(), x, y);
-}
+int mouse::gety() { return ymp; }
 
-int mouse::getx()
-{
-    return xmp;
-}
-
-int mouse::gety()
-{
-    return ymp;
-}
-
-bool mouse::isClicked()
-{
-    return mouseClick;
-}
+bool mouse::isClicked() { return mouseClick; }

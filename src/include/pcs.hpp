@@ -4,28 +4,27 @@
 
 #include "property.hpp"
 
-class PropertyControlSystem
-{
+class PropertyControlSystem {
 private:
-    property *properties[OVERAL_PROPERTIES + 1];
+  property *properties[OVERAL_PROPERTIES + 1];
 
-    int getPropertyID(property *p);
-    property *create(int id);
+  int getPropertyID(property *p);
+  property *create(int id);
 
 public:
-    PropertyControlSystem(/* args */);
-    PropertyControlSystem(const PropertyControlSystem &PropertyControlSystem);
+  PropertyControlSystem(/* args */);
+  PropertyControlSystem(const PropertyControlSystem &PropertyControlSystem);
 
-    ~PropertyControlSystem();
+  ~PropertyControlSystem();
 
-    void update();
-    void destroy();
-    void draw();
+  void update();
+  void destroy();
+  void draw();
 
-    PropertyControlSystem *self() { return this; }
+  PropertyControlSystem *self() { return this; }
 
-    property *addProperty(int id);
-    property *connectProperty(property *p);
+  property *addProperty(int id);
+  property *connectProperty(property *p);
 
-    property *getProperty(int id);
+  property *getProperty(int id);
 };

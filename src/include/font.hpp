@@ -2,18 +2,17 @@
 
 #include "../includer.hpp"
 
-class font
-{
+class font {
 private:
-    SDL_Color color = {0, 0, 0};
-    TTF_Font *f;
+  SDL_Color color = {0, 0, 0};
+  TTF_Font *f;
 
 public:
-    void setColor(int r, int g, int b);
+  void setColor(int r, int g, int b);
 
-    SDL_Surface *makeText(const char *t);
+  SDL_Surface *makeText(const char *t);
 
-    font(/* args */);
-    font(const char *p);
-    ~font();
+  font(/* args */);
+  font(const char *p);
+  ~font();
 };

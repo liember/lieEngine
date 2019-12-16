@@ -1,21 +1,20 @@
 #pragma once
 
-#include "property.hpp"
 #include "pcs.hpp"
+#include "property.hpp"
 #include "speedProperty.hpp"
 
-class gravityProperty : public property
-{
+class gravityProperty : public property {
 private:
-    double Ygravity, Xgravity;
-    speedProperty *speed;
+  double Ygravity, Xgravity;
+  speedProperty *speed;
 
 public:
-    void setY(double x, double y);
+  void setY(double x, double y);
 
-    void draw();
-    void update();
+  void draw();
+  void update();
 
-    gravityProperty(PropertyControlSystem *pcs);
-    ~gravityProperty();
+  gravityProperty(PropertyControlSystem *pcs);
+  ~gravityProperty();
 };

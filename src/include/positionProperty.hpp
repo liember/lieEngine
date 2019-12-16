@@ -1,40 +1,39 @@
 #pragma once
 
-#include "property.hpp"
 #include "pcs.hpp"
+#include "property.hpp"
 
-class positionProperty : public property
-{
+class positionProperty : public property {
 private:
-    double x;
-    double y;
+  double x;
+  double y;
 
-    bool useglobalxy;
+  bool useglobalxy;
 
-    static double gx;
-    static double gy;
+  static double gx;
+  static double gy;
 
 public:
-    void update();
-    void draw();
+  void update();
+  void draw();
 
-    void setGUsing(bool b);
+  void setGUsing(bool b);
 
-    void enableGlobal(bool v);
+  void enableGlobal(bool v);
 
-    static void setGlobal(double ix, double iy);
-    static double getGX();
-    static double getGY();
+  static void setGlobal(double ix, double iy);
+  static double getGX();
+  static double getGY();
 
-    double getX();
-    double getY();
+  double getX();
+  double getY();
 
-    double getOnlyX();
-    double getOnlyY();
+  double getOnlyX();
+  double getOnlyY();
 
-    void setX(double dx);
-    void setY(double dy);
+  void setX(double dx);
+  void setY(double dy);
 
-    positionProperty(PropertyControlSystem *pcs);
-    ~positionProperty();
+  positionProperty(PropertyControlSystem *pcs);
+  ~positionProperty();
 };

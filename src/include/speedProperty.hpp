@@ -1,24 +1,23 @@
 #pragma once
 
-#include "property.hpp"
-#include "positionProperty.hpp"
 #include "pcs.hpp"
+#include "positionProperty.hpp"
+#include "property.hpp"
 
-class speedProperty : public property
-{
+class speedProperty : public property {
 private:
-    double x, y;
-    positionProperty *position;
+  double x, y;
+  positionProperty *position;
 
 public:
-    speedProperty(PropertyControlSystem *pcs);
-    ~speedProperty();
+  speedProperty(PropertyControlSystem *pcs);
+  ~speedProperty();
 
-    void set(double dx, double dy);
+  void set(double dx, double dy);
 
-    double getX();
-    double getY();
+  double getX();
+  double getY();
 
-    void update();
-    void draw();
+  void update();
+  void draw();
 };
