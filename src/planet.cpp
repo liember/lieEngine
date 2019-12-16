@@ -4,12 +4,12 @@ planet::planet(/* args */) : size(100) {
   mass = 59722;
   pos = new positionProperty(this);
   connectProperty(pos);
+  vel = new speedProperty(this);
+  connectProperty(vel);
   text = new textProperty(this);
   connectProperty(text);
   text->init("undefined");
   text->SetSize(60, 20);
-  vel = new speedProperty(this);
-  connectProperty(vel);
   tex = new textureProperty(this);
   tex->setTexture("assets/b2.png");
   connectProperty(tex);
@@ -21,11 +21,11 @@ planet::planet(/* args */) : size(100) {
 }
 
 planet::planet(const char *name, int radius, double m, double spX, double spY,
-               double x, double y, const char *t) {
+               double posx, double posy, const char *t) {
   mass = m;
   pos = new positionProperty(this);
-  pos->setX(x);
-  pos->setY(y);
+  pos->setX(posx);
+  pos->setY(posy);
   connectProperty(pos);
   text = new textProperty(this);
   text->init(name);
@@ -41,6 +41,7 @@ planet::planet(const char *name, int radius, double m, double spX, double spY,
   col = new colliderProperty(this);
   col->setDraw(true);
   size = radius * 2;
+  setSize(size);
   col->setBody(size, size);
   connectProperty(col);
   gravity = true;
@@ -59,9 +60,9 @@ void planet::setPos(double x, double y) {
 
 void planet::setVel(double x, double y) { vel->set(x, y); }
 
-double planet::getPosX() { return pos->getOnlyX(); }
+double planet::getPosX() { return pos->getOnlyX() + size / 2; }
 
-double planet::getPosY() { return pos->getOnlyY(); }
+double planet::getPosY() { return pos->getOnlyY() + size / 2; }
 
 double planet::getGlobX() { return pos->getX(); }
 
