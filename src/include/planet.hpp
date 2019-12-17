@@ -36,7 +36,7 @@ public:
   double getGlobX();
   double getGlobY();
 
-  void collide();
+  bool collide();
   void setTex(const char *p);
 
   planet(/* args */);
