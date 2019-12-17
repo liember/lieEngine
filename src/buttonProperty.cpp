@@ -62,3 +62,7 @@ void buttonProperty::update() {
     }
   }
 }
+
+void buttonProperty::press(){
+  fill = !fill;
+}
