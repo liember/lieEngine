@@ -27,6 +27,7 @@ public:
   void setSize(int w, int h);
   void setPos(double x, double y);
 
+  void press();
   void draw();
   void update();
 };
