@@ -11,12 +11,17 @@ buttonProperty *but;
 
 camera *cam;
 
+playerShip *pla;
+
 // planets
 planet *pl[10];
 
 buttonProperty *quitB;
 buttonProperty *darwLines;
 bool draw = false;
+buttonProperty *nextP;
+int onP = 0;
+buttonProperty *teleport;
 
 double gravity = 0.0000667408;
 int nearK = 70;
@@ -57,13 +62,47 @@ void game::initGame() {
 
   gmsManager.add(obj);
 
+  //########### nextPlanet
+  obj = new gameobj();
+  pos = new positionProperty(obj);
+  pos->setX(490);
+  pos->setY(580);
+  obj->connectProperty(pos);
+
+  text = new textProperty(obj);
+  text->init("Next planet");
+  obj->connectProperty(text);
+
+  nextP = new buttonProperty(obj);
+  nextP->setSize(200, 60);
+  obj->connectProperty(nextP);
+
+  gmsManager.add(obj);
+
+  //########### teleport
+  obj = new gameobj();
+  pos = new positionProperty(obj);
+  pos->setX(720);
+  pos->setY(580);
+  obj->connectProperty(pos);
+
+  text = new textProperty(obj);
+  text->init("Teleport player");
+  obj->connectProperty(text);
+
+  teleport = new buttonProperty(obj);
+  teleport->setSize(200, 60);
+  obj->connectProperty(teleport);
+
+  gmsManager.add(obj);
+
   //############ player ##############
 
-  playerShip *pla = new playerShip();
+  pla = new playerShip();
   pla->setPos(0, 149 * nearK + 200);
   pla->setTex("assets/bird.png");
   pla->setVel(0 , -100);
-  pla->setMass(1);
+  pla->setMass(0.00000001);
   pla->setSize(50);
   pla->setSpeed(0.01);
   gmsManager.add(pla);
@@ -150,6 +189,25 @@ void game::updateGame() {
 
   if (darwLines->isPressed()) {
     draw = !draw;
+  }
+
+  if ( teleport->isPressed())
+  {
+    pla->setPos(-cam->getX() + w / 2, -cam->getY() + h / 2);
+  }
+  
+
+
+  if (nextP->isPressed()) {
+    if (onP == 8)
+    {
+      onP = 0;
+    }else
+    {
+      onP++;
+    }
+    cam->set(-pl[onP]->getPosX() + w / 2,-pl[onP]->getPosY() + h /2);
+    nextP->press();
   }
 
   for (int i = 0; i < 9; i++) {
