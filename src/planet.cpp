@@ -80,11 +80,10 @@ void planet::setSize(int s) {
   tex->setTextureSize(s);
 }
 
-void planet::collide() {
+bool planet::collide() {
   PropertyControlSystem *c = col->findCollision();
   if (c != nullptr) {
-
-    vel->set(0, 0);
+    return true;
   }
 }
 
