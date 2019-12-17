@@ -28,3 +28,11 @@ void camera::update() {
 }
 
 void camera::set(double x, double y) { pos->setGlobal(x, y); }
+
+double camera::getX(){
+  return pos->getGX();
+}
+
+double camera::getY(){
+  return pos->getGY();
+}
