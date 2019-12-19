@@ -6,11 +6,14 @@
 #include "pcs.hpp"
 #include "property.hpp"
 
-class gameobj : public PropertyControlSystem {
+class gameobj : public PropertyControlSystem
+{
 private:
   char *tag;
 
 public:
+  bool isLife;
+
   gameobj(const gameobj &gameobj);
 
   char *getTag();
