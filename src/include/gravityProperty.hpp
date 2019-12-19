@@ -4,7 +4,8 @@
 #include "property.hpp"
 #include "speedProperty.hpp"
 
-class gravityProperty : public property {
+class gravityProperty : public property
+{
 private:
   double Ygravity, Xgravity;
   speedProperty *speed;

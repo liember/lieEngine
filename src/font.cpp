@@ -1,10 +1,12 @@
 #include "includer.hpp"
 
-SDL_Surface *font::makeText(const char *t) {
+SDL_Surface *font::makeText(const char *t)
+{
   return TTF_RenderText_Solid(f, t, color);
 }
 
-void font::setColor(int r, int g, int b) {
+void font::setColor(int r, int g, int b)
+{
   color.r = r;
   color.g = g;
   color.b = b;
