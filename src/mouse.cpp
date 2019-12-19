@@ -3,7 +3,8 @@
 
 #include <SDL2/SDL.h>
 
-mouse::mouse(PropertyControlSystem *pcs) {
+mouse::mouse(PropertyControlSystem *pcs)
+{
   mouseClick = false;
   setCoursor(0, 0);
   SDL_GetMouseState(&sourceX, &sourceY);
@@ -11,19 +12,24 @@ mouse::mouse(PropertyControlSystem *pcs) {
 
 mouse::~mouse() {}
 
-void mouse::update() {
-  if (game::event.type == SDL_MOUSEMOTION) {
+void mouse::update()
+{
+  if (game::event.type == SDL_MOUSEMOTION)
+  {
     SDL_GetMouseState(&xmp, &ymp);
   }
-  if (game::event.type == SDL_MOUSEBUTTONDOWN) {
+  if (game::event.type == SDL_MOUSEBUTTONDOWN)
+  {
     mouseClick = true;
   }
-  if (game::event.type == SDL_MOUSEBUTTONUP) {
+  if (game::event.type == SDL_MOUSEBUTTONUP)
+  {
     mouseClick = false;
   }
 }
 
-void mouse::setCoursor(int x, int y) {
+void mouse::setCoursor(int x, int y)
+{
   SDL_WarpMouseInWindow(game::getWindow(), x, y);
 }
 
