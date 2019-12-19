@@ -5,7 +5,8 @@
 #include "property.hpp"
 #include "speedProperty.hpp"
 
-class positionLimitProperty : public property {
+class positionLimitProperty : public property
+{
 private:
   positionProperty *pos;
   speedProperty *vel;
