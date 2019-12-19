@@ -4,7 +4,8 @@
 
 #include "property.hpp"
 
-class PropertyControlSystem {
+class PropertyControlSystem
+{
 private:
   property *properties[OVERAL_PROPERTIES + 1];
 
