@@ -2,7 +2,8 @@
 
 #include "../includer.hpp"
 
-class font {
+class font
+{
 private:
   SDL_Color color = {0, 0, 0};
   TTF_Font *f;
