@@ -21,7 +21,7 @@
 
 #include "include/WASDAnimatorProperty.hpp"
 #include "include/WASDControllerProperty.hpp"
-#include "include/buttonProperty.hpp"
+#include "include/clickAreaProperty.hpp"
 #include "include/cameraProperty.hpp"
 #include "include/colliderProperty.hpp"
 #include "include/positionLimitProperty.hpp"
@@ -29,8 +29,10 @@
 #include "include/textureProperty.hpp"
 #include "include/tilemapProperty.hpp"
 
-#include "include/planet.hpp"
+#include "include/spaceBody.hpp"
 #include "include/playerShip.hpp"
+#include "include/wather.hpp"
+#include "include/button.hpp"
 
 #include "include/exeptions.hpp"
 #include "include/mouse.hpp"
