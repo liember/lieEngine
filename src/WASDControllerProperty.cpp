@@ -1,20 +1,25 @@
 #include "includer.hpp"
 
 WASDControllerProperty::WASDControllerProperty(PropertyControlSystem *pcs)
-    : property(PROPERTY_WASD_CONTROLLER) {
+    : property(PROPERTY_WASD_CONTROLLER)
+{
   for (size_t i = 0; i <= 4; i++)
     keyStates[i] = false;
 }
 
 WASDControllerProperty::~WASDControllerProperty() {}
 
-bool *WASDControllerProperty::getStates() {
+bool *WASDControllerProperty::getStates()
+{
   return WASDControllerProperty::keyStates;
 }
 
-void WASDControllerProperty::update() {
-  if (game::event.type == SDL_KEYDOWN) {
-    switch (game::event.key.keysym.sym) {
+void WASDControllerProperty::update()
+{
+  if (game::event.type == SDL_KEYDOWN)
+  {
+    switch (game::event.key.keysym.sym)
+    {
     case SDLK_w:
       keyStates[W_KEY] = true;
       break;
@@ -34,8 +39,10 @@ void WASDControllerProperty::update() {
       break;
     }
   }
-  if (game::event.type == SDL_KEYUP) {
-    switch (game::event.key.keysym.sym) {
+  if (game::event.type == SDL_KEYUP)
+  {
+    switch (game::event.key.keysym.sym)
+    {
     case SDLK_w:
       keyStates[W_KEY] = false;
       break;

@@ -1,7 +1,8 @@
 #include "includer.hpp"
 
 WASDAnimatorProperty::WASDAnimatorProperty(PropertyControlSystem *pcs)
-    : property(PROPERY_WASD_ANIMATOR) {
+    : property(PROPERY_WASD_ANIMATOR)
+{
   speed = 0.1;
   inertion = true;
   vel = static_cast<speedProperty *>(pcs->getProperty(PROPERTY_SPEED));
@@ -16,46 +17,68 @@ void WASDAnimatorProperty::setInertion(bool val) { inertion = val; }
 
 void WASDAnimatorProperty::setSpeed(double val) { speed = val; }
 
-void WASDAnimatorProperty::update() {
+void WASDAnimatorProperty::update()
+{
 
-  if (controller->getStates()[SPACE_KEY]) {
+  if (controller->getStates()[SPACE_KEY])
+  {
     moveVertical(-200);
   }
 
-  if (controller->getStates()[W_KEY]) {
+  if (controller->getStates()[W_KEY])
+  {
     moveVertical(-speed);
-  } else {
+  }
+  else
+  {
     moveVertical(0);
   }
-  if (controller->getStates()[A_KEY]) {
+  if (controller->getStates()[A_KEY])
+  {
     moveHorizontal(-speed);
-  } else {
+  }
+  else
+  {
     moveHorizontal(0);
   }
-  if (controller->getStates()[S_KEY]) {
+  if (controller->getStates()[S_KEY])
+  {
     moveVertical(speed);
-  } else {
+  }
+  else
+  {
     moveVertical(0);
   }
-  if (controller->getStates()[D_KEY]) {
+  if (controller->getStates()[D_KEY])
+  {
     moveHorizontal(speed);
-  } else {
+  }
+  else
+  {
     moveHorizontal(0);
   }
 }
 
-void WASDAnimatorProperty::moveVertical(double val) {
-  if (inertion) {
+void WASDAnimatorProperty::moveVertical(double val)
+{
+  if (inertion)
+  {
     vel->set(vel->getX(), vel->getY() + val);
-  } else {
+  }
+  else
+  {
     vel->set(vel->getX(), val);
   }
 }
 
-void WASDAnimatorProperty::moveHorizontal(double val) {
-  if (inertion) {
+void WASDAnimatorProperty::moveHorizontal(double val)
+{
+  if (inertion)
+  {
     vel->set(vel->getX() + val, vel->getY());
-  } else {
+  }
+  else
+  {
     vel->set(val, vel->getY());
   }
 }
