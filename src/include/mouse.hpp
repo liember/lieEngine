@@ -6,7 +6,8 @@
 #include "game.hpp"
 #include <SDL2/SDL.h>
 
-class mouse : public property {
+class mouse : public property
+{
 private:
   int sourceX, sourceY;
   int xmp, ymp;
