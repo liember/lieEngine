@@ -17,7 +17,8 @@
 #define PROPERY_TEXT 12
 #define PROPERTY_BUTTON 11
 
-class property {
+class property
+{
 private:
   int id;
 
