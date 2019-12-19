@@ -4,7 +4,8 @@
 #include "positionLimitProperty.hpp"
 #include "property.hpp"
 
-class camera : public property {
+class camera : public property
+{
 private:
   positionLimitProperty *lim;
   positionProperty *pos;
@@ -20,6 +21,9 @@ public:
   void draw() {}
 
   void set(double x, double y);
+  void setX(double x);
+  void setY(double x);
+
   double getX();
   double getY();
 
