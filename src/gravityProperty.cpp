@@ -5,7 +5,8 @@
 #include <iostream>
 
 gravityProperty::gravityProperty(PropertyControlSystem *pcs)
-    : property(PROPERTY_GRAVITY) {
+    : property(PROPERTY_GRAVITY)
+{
   std::cout << "[?] New gravity has added" << std::endl;
   speed = static_cast<speedProperty *>(pcs->getProperty(PROPERTY_SPEED));
   Ygravity = 0.3;
@@ -13,12 +14,14 @@ gravityProperty::gravityProperty(PropertyControlSystem *pcs)
 
 gravityProperty::~gravityProperty() {}
 
-void gravityProperty::setY(double x, double y) {
+void gravityProperty::setY(double x, double y)
+{
   Ygravity = y;
   Xgravity = x;
 }
 
-void gravityProperty::update() {
+void gravityProperty::update()
+{
 
   speed->set(speed->getX() + Xgravity, speed->getY() + Ygravity);
 }
