@@ -1,6 +1,7 @@
 #include "includer.hpp"
 
-planet::planet(/* args */) : size(100) {
+spaceBody::spaceBody(/* args */) : size(100)
+{
   mass = 59722;
   pos = new positionProperty(this);
   connectProperty(pos);
@@ -20,8 +21,9 @@ planet::planet(/* args */) : size(100) {
   gravity = true;
 }
 
-planet::planet(const char *name, int radius, double m, double spX, double spY,
-               double posx, double posy, const char *t) {
+spaceBody::spaceBody(const char *name, int radius, double m, double spX, double spY,
+                     double posx, double posy, const char *t)
+{
   mass = m;
   pos = new positionProperty(this);
   pos->setX(posx);
@@ -31,6 +33,7 @@ planet::planet(const char *name, int radius, double m, double spX, double spY,
   text->init(name);
   connectProperty(text);
   text->SetSize(60, 20);
+  strcpy(title, name);
   vel = new speedProperty(this);
   vel->set(spX, spY);
   connectProperty(vel);
@@ -39,7 +42,7 @@ planet::planet(const char *name, int radius, double m, double spX, double spY,
   tex->setTexture(t);
   connectProperty(tex);
   col = new colliderProperty(this);
-  col->setDraw(true);
+  col->setDraw(false);
   size = radius * 2;
   setSize(size);
   col->setBody(size, size);
@@ -47,46 +50,82 @@ planet::planet(const char *name, int radius, double m, double spX, double spY,
   gravity = true;
 }
 
-void planet::setText(const char *t) { text->init(t); }
+void spaceBody::setTextColor(int r, int g, int b)
+{
+  text->setColorRGB(r, g, b);
+  text->init(title);
+}
 
-planet::~planet() {}
+void spaceBody::setText(const char *t)
+{
+  text->init(t);
+}
 
-double planet::getMass() { return mass; }
+spaceBody::~spaceBody()
+{
+  isLife = false;
+}
 
-void planet::setPos(double x, double y) {
+double spaceBody::getMass() { return mass; }
+
+void spaceBody::setPos(double x, double y)
+{
   pos->setX(x);
   pos->setY(y);
 }
 
-void planet::setVel(double x, double y) { vel->set(x, y); }
+void spaceBody::setVel(double x, double y) { vel->set(x, y); }
 
-double planet::getPosX() { return pos->getOnlyX() + size / 2; }
+double spaceBody::getPosX()
+{
+  return pos->getOnlyX() + size / 2;
+}
 
-double planet::getPosY() { return pos->getOnlyY() + size / 2; }
+double spaceBody::getPosY()
+{
+  return pos->getOnlyY() + size / 2;
+}
 
-double planet::getGlobX() { return pos->getX(); }
+double spaceBody::getGlobX()
+{
+  return pos->getX();
+}
 
-double planet::getGlobY() { return pos->getY(); }
+double spaceBody::getGlobY()
+{
+  return pos->getY();
+}
 
-void planet::addVel(double x, double y) {
+void spaceBody::addVel(double x, double y)
+{
   vel->set(vel->getX() + x, vel->getY() + y);
 }
 
-void planet::setMass(double val) { mass = val; }
+void spaceBody::setMass(double val) { mass = val; }
 
-void planet::setSize(int s) {
+void spaceBody::setSize(int s)
+{
   size = s;
   col->setBody(s, s);
   tex->setTextureSize(s);
 }
 
-bool planet::collide() {
+bool spaceBody::collide()
+{
   PropertyControlSystem *c = col->findCollision();
-  if (c != nullptr) {
+  if (c != nullptr)
+  {
     return true;
   }
+  return false;
 }
 
-bool planet::isGravit() { return gravity; }
+bool spaceBody::isGravit()
+{
+  return gravity;
+}
 
-void planet::setTex(const char *p) { tex->setTexture(p); }
+void spaceBody::setTex(const char *p)
+{
+  tex->setTexture(p);
+}

@@ -2,13 +2,16 @@
 
 #include "../includer.hpp"
 
-class planet : public gameobj {
+class spaceBody : public gameobj
+{
 private:
   positionProperty *pos;
   speedProperty *vel;
   textureProperty *tex;
   colliderProperty *col;
   textProperty *text;
+
+  char title[20];
 
   double mass;
   int size;
@@ -39,8 +42,10 @@ public:
   bool collide();
   void setTex(const char *p);
 
-  planet(/* args */);
-  planet(const char *name, int radius, double m, double spX, double spY,
-         double posx, double posy, const char *t = "assets/b2.png");
-  ~planet();
+  void setTextColor(int r, int g, int b);
+
+  spaceBody(/* args */);
+  spaceBody(const char *name, int radius, double m, double spX, double spY,
+            double posx, double posy, const char *t = "assets/b2.png");
+  ~spaceBody();
 };
