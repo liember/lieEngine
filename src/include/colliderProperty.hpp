@@ -9,7 +9,8 @@
 #include <algorithm>
 #include <vector>
 
-class colliderProperty : public property {
+class colliderProperty : public property
+{
 private:
   static std::vector<colliderProperty *> colliders;
 
