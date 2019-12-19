@@ -1,24 +1,33 @@
 #include "includer.hpp"
 
-void PropertyControlSystem::update() {
-  for (size_t i = 0; i <= OVERAL_PROPERTIES; i++) {
-    if (properties[i]) {
+void PropertyControlSystem::update()
+{
+  for (size_t i = 0; i <= OVERAL_PROPERTIES; i++)
+  {
+    if (properties[i])
+    {
       properties[i]->update();
     }
   }
 }
 
-PropertyControlSystem::PropertyControlSystem(const PropertyControlSystem &cp) {
-  for (size_t i = 0; i <= OVERAL_PROPERTIES; i++) {
-    if (properties[i]) {
+PropertyControlSystem::PropertyControlSystem(const PropertyControlSystem &cp)
+{
+  for (size_t i = 0; i <= OVERAL_PROPERTIES; i++)
+  {
+    if (properties[i])
+    {
       properties[i] = cp.properties[i];
     }
   }
 }
 
-void PropertyControlSystem::draw() {
-  for (size_t i = 0; i <= OVERAL_PROPERTIES; i++) {
-    if (properties[i]) {
+void PropertyControlSystem::draw()
+{
+  for (size_t i = 0; i <= OVERAL_PROPERTIES; i++)
+  {
+    if (properties[i])
+    {
       properties[i]->draw();
     }
   }
@@ -26,7 +35,8 @@ void PropertyControlSystem::draw() {
 
 property *PropertyControlSystem::addProperty(int id) // safity adding property
 {
-  if (!properties[id]) {
+  if (!properties[id])
+  {
     properties[id] = create(id);
   }
   return properties[id];
@@ -35,17 +45,24 @@ property *PropertyControlSystem::addProperty(int id) // safity adding property
 property *PropertyControlSystem::connectProperty(property *p) // unsafe
 {
   int id = p->getID();
-  if (properties[id]) {
+  if (properties[id])
+  {
     throw new propertySwapping();
-  } else {
+  }
+  else
+  {
     properties[id] = p;
   }
   return properties[id];
 }
 
-property *PropertyControlSystem::getProperty(int id) {
-  if (properties[id]) {
-  } else {
+property *PropertyControlSystem::getProperty(int id)
+{
+  if (properties[id])
+  {
+  }
+  else
+  {
     std::cout << "[!] Property not created, creating new property "
               << std::endl;
     properties[id] = create(id);
@@ -53,25 +70,33 @@ property *PropertyControlSystem::getProperty(int id) {
   return properties[id];
 }
 
-PropertyControlSystem::PropertyControlSystem(/* args */) {
-  for (size_t i = 0; i <= OVERAL_PROPERTIES; i++) {
-    if (properties[i]) {
+PropertyControlSystem::PropertyControlSystem(/* args */)
+{
+  for (size_t i = 0; i <= OVERAL_PROPERTIES; i++)
+  {
+    if (properties[i])
+    {
       properties[i] = nullptr;
     }
   }
   std::cout << "[?] Has been created new property control system" << std::endl;
 }
 
-PropertyControlSystem::~PropertyControlSystem() {
-  for (size_t i = 0; i <= OVERAL_PROPERTIES; i++) {
-    if (properties[i]) {
+PropertyControlSystem::~PropertyControlSystem()
+{
+  for (size_t i = 0; i <= OVERAL_PROPERTIES; i++)
+  {
+    if (properties[i])
+    {
       delete properties[i];
     }
   }
 }
 
-property *PropertyControlSystem::create(int id) {
-  switch (id) {
+property *PropertyControlSystem::create(int id)
+{
+  switch (id)
+  {
   case PROPERTY_POSITION:
     return new positionProperty(this);
     break;
@@ -109,7 +134,7 @@ property *PropertyControlSystem::create(int id) {
     return new textProperty(this);
     break;
   case PROPERTY_BUTTON:
-    return new buttonProperty(this);
+    return new clickAreaProperty(this);
     break;
   default:
     return nullptr;
