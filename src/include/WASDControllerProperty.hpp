@@ -10,7 +10,8 @@
 #define D_KEY 3
 #define SPACE_KEY 4
 
-class WASDControllerProperty : public property {
+class WASDControllerProperty : public property
+{
 private:
   bool keyStates[3];
 

@@ -8,7 +8,8 @@
 
 #include <SDL2/SDL.h>
 
-class WASDAnimatorProperty : public property {
+class WASDAnimatorProperty : public property
+{
 private:
   positionLimitProperty *lim;
   speedProperty *vel;

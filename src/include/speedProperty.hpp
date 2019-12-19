@@ -4,7 +4,8 @@
 #include "positionProperty.hpp"
 #include "property.hpp"
 
-class speedProperty : public property {
+class speedProperty : public property
+{
 private:
   double x, y;
   positionProperty *position;

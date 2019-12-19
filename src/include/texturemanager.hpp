@@ -5,7 +5,8 @@
 
 #include "pcs.hpp"
 
-class texturemanager {
+class texturemanager
+{
 private:
   static void checkFile(const char *file_name);
 
