@@ -102,7 +102,7 @@ void game::initGame() {
   pla->setPos(0, 149 * nearK + 200);
   pla->setTex("assets/bird.png");
   pla->setVel(0 , -100);
-  pla->setMass(0.00000001);
+  pla->setMass(0.000000000000000001);
   pla->setSize(50);
   pla->setSpeed(0.01);
   gmsManager.add(pla);
