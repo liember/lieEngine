@@ -6,7 +6,8 @@
 #include "gameobj.hpp"
 #include "property.hpp"
 
-class objectsManager {
+class objectsManager
+{
 private:
   std::vector<gameobj *> objekts;
 
