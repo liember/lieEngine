@@ -3,7 +3,8 @@
 #include "pcs.hpp"
 #include "property.hpp"
 
-class positionProperty : public property {
+class positionProperty : public property
+{
 private:
   double x;
   double y;
@@ -22,6 +23,9 @@ public:
   void enableGlobal(bool v);
 
   static void setGlobal(double ix, double iy);
+  static void setGlobalX(double x);
+  static void setGlobalY(double y);
+
   static double getGX();
   static double getGY();
 
