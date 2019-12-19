@@ -4,7 +4,8 @@
 
 #include <iostream>
 
-void speedProperty::update() {
+void speedProperty::update()
+{
   position->setX(position->getOnlyX() + x * timer::GetDelta());
   position->setY(position->getOnlyY() + y * timer::GetDelta());
 }
@@ -12,7 +13,8 @@ void speedProperty::update() {
 void speedProperty::draw() {}
 
 speedProperty::speedProperty(PropertyControlSystem *pcs)
-    : property(PROPERTY_SPEED) {
+    : property(PROPERTY_SPEED)
+{
   x = 0;
   y = 0;
   std::cout << "[?] New speed property added" << std::endl;
@@ -22,7 +24,8 @@ speedProperty::speedProperty(PropertyControlSystem *pcs)
 
 speedProperty::~speedProperty() {}
 
-void speedProperty::set(double dx, double dy) {
+void speedProperty::set(double dx, double dy)
+{
   x = dx;
   y = dy;
 }
