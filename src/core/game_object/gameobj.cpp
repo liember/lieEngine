@@ -22,4 +22,7 @@ gameobj::gameobj()
   std::cout << "[?] Create new gameobject without tag" << std::endl;
 }
 
-gameobj::~gameobj() { delete tag; }
+gameobj::~gameobj()
+{
+  delete tag;
+}

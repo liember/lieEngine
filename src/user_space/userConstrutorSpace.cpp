@@ -1,4 +1,9 @@
-#include "includer.hpp"
+#include "../core/game/game.hpp"
+
+#include "user_objects/watcher/wather.hpp"
+#include "user_objects/space_body/spaceBody.hpp"
+#include "user_objects/player/playerShip.hpp"
+#include "user_objects/GUI/Button/button.hpp"
 
 wather *cam;
 spaceBody *pl[10];
