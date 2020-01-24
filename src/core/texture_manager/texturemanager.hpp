@@ -3,7 +3,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "pcs.hpp"
+#include "../ECS/property_contol_system/pcs.hpp"
+#include "../game/game.hpp"
+
+#include <fstream>
+#include <iostream>
 
 class texturemanager
 {

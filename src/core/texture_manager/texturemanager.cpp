@@ -1,13 +1,5 @@
 #include "texturemanager.hpp"
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-
-#include "../game.hpp"
-
-#include <fstream>
-#include <iostream>
-
 using namespace std;
 
 texturemanager::texturemanager(/* args */) {}

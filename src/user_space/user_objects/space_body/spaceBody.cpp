@@ -1,4 +1,4 @@
-#include "includer.hpp"
+#include "spaceBody.hpp"
 
 spaceBody::spaceBody(/* args */) : size(100)
 {
