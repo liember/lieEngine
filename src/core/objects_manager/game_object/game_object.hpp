@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../ECS/property_contol_system/pcs.hpp"
+#include "../../property_manager/pcs.hpp"
 #include <string.h>
+#include <iostream>
 
 class gameobj : public PropertyControlSystem
 {

@@ -4,9 +4,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "../objects_manager/objectsManager.hpp"
-#include "../game_object/gameobj.hpp"
-#include "../timer/timer.hpp"
+#include "objects_manager/objectsManager.hpp"
+#include "time_manager/timer.hpp"
 
 class game
 {

@@ -1,5 +1,13 @@
 #include "pcs.hpp"
 
+#include "propertyes/click_area_property/clickAreaProperty.hpp"
+#include "propertyes/mouse_property/mouse.hpp"
+#include "propertyes/position_property/positionProperty.hpp"
+#include "propertyes/property/property.hpp"
+#include "propertyes/speed_property/speedProperty.hpp"
+#include "propertyes/text_property/textProperty.hpp"
+#include "propertyes/texture_property/textureProperty.hpp"
+
 void PropertyControlSystem::update()
 {
   for (size_t i = 0; i <= OVERAL_PROPERTIES; i++)
@@ -105,26 +113,11 @@ property *PropertyControlSystem::create(int id)
   case PROPERTY_SPEED:
     return new speedProperty(this);
     break;
-  case PROPERTY_WASD_CONTROLLER:
-    return new WASDControllerProperty(this);
-    break;
   case PROPERTY_COLLIDER:
     return nullptr;
     break;
-  case PROPERTY_GRAVITY:
-    return new gravityProperty(this);
-    break;
-  case PROPERTY_CAMERA:
-    return new camera(this);
-    break;
-  case PROPERTY_POSITION_LIMIT:
-    return new positionLimitProperty(this);
-    break;
   case PROPERTY_MOUSE:
     return new mouse(this);
-    break;
-  case PROPERY_WASD_ANIMATOR:
-    return new WASDAnimatorProperty(this);
     break;
   case PROPERY_TEXT:
     return new textProperty(this);

@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../../includer.hpp"
+#include "../../pcs.hpp"
+#include "../mouse_property/mouse.hpp"
+#include "../position_property/positionProperty.hpp"
+#include "../text_property/textProperty.hpp"
 
 class clickAreaProperty : public property
 {

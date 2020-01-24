@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../includer.hpp"
+#include "propertyes/property/property.hpp"
+#include "../texture_manager/texturemanager.hpp"
+#include "../core.hpp"
 
 class PropertyControlSystem
 {

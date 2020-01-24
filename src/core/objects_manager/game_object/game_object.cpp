@@ -1,4 +1,4 @@
-#include "gameobj.hpp"
+#include "game_object.hpp"
 
 gameobj::gameobj(const char *name)
 {

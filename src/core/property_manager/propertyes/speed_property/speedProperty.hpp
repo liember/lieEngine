@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../../includer.hpp"
+#include "../../pcs.hpp"
+#include "propertyes/position_property/positionProperty.hpp"
 
 class speedProperty : public property
 {

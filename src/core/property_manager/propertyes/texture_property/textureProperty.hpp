@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../../includer.hpp"
+#include "../../pcs.hpp"
+#include "../position_property/positionProperty.hpp"
 
 class textureProperty : public property
 {
