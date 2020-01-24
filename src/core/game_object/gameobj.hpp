@@ -1,10 +1,7 @@
 #pragma once
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-
-#include "pcs.hpp"
-#include "property.hpp"
+#include "../ECS/property_contol_system/pcs.hpp"
+#include <string.h>
 
 class gameobj : public PropertyControlSystem
 {

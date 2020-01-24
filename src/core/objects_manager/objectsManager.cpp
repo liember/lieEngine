@@ -1,7 +1,4 @@
-
-#include "include/objectsManager.hpp"
-#include "include/gameobj.hpp"
-#include <vector>
+#include "objectsManager.hpp"
 
 using namespace std;
 

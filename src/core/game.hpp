@@ -1,14 +1,14 @@
 #pragma once
 
-#include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL.h>
 
-#include "gameobj.hpp"
-#include "timer.hpp"
+#include "objects_manager/objectsManager.hpp"
+#include "game_object/gameobj.hpp"
+#include "timer/timer.hpp"
 
-#include "objectsManager.hpp"
-
-class game {
+class game
+{
 private:
   bool isrunning;
   int cnt = 0;

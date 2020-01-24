@@ -1,11 +1,9 @@
-#include "include/texturemanager.hpp"
+#include "texturemanager.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "include/exeptions.hpp"
-#include "include/game.hpp"
-#include "include/pcs.hpp"
+#include "../game.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -20,8 +18,6 @@ void texturemanager::checkFile(const char *file_name)
 {
   ifstream file;
   file.open(file_name);
-  if (!file)
-    throw new fileNotExist();
 }
 
 SDL_Texture *texturemanager::loadTexture(const char *filename)
@@ -32,7 +28,6 @@ SDL_Texture *texturemanager::loadTexture(const char *filename)
   SDL_Texture *tex =
       SDL_CreateTextureFromSurface(game::getRenderer(), tempSurf);
   SDL_FreeSurface(tempSurf);
-
   return tex;
 }
 

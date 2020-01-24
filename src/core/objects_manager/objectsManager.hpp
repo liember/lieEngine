@@ -3,8 +3,7 @@
 #include <iostream>
 #include <vector>
 
-#include "gameobj.hpp"
-#include "property.hpp"
+#include "../game_object/gameobj.hpp"
 
 class objectsManager
 {
