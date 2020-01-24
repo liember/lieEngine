@@ -1,12 +1,11 @@
-#pragma once
+#ifndef _TEXTUE_MANAGER_
+#define _TEXTUE_MANAGER_
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
 #include <fstream>
 #include <iostream>
-
-#include "../objects_manager/objectsManager.hpp"
 
 class texturemanager
 {
@@ -21,3 +20,5 @@ public:
   texturemanager(/* args */);
   ~texturemanager();
 };
+
+#endif

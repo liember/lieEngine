@@ -1,8 +1,8 @@
-#pragma once
+#ifndef _PROPERTY_CONTROL_SYSTEM_
+#define _PROPERTY_CONTROL_SYSTEM_
 
-#include "propertyes/property/property.hpp"
 #include "../texture_manager/texturemanager.hpp"
-#include "../core.hpp"
+#include "propertyes/property/property.hpp"
 
 class PropertyControlSystem
 {
@@ -29,3 +29,5 @@ public:
 
   property *getProperty(int id);
 };
+
+#endif

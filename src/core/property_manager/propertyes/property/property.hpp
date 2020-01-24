@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _PROPERTY_
+#define _PROPERTY_
 
 //ну я хз как это без макроса мудрить
 #define OVERAL_PROPERTIES 12
@@ -36,3 +37,5 @@ public:
   property(const property &cp);
   virtual ~property();
 };
+
+#endif

@@ -1,9 +1,10 @@
-#pragma once
+#ifndef _OBJECTS_MANGER_
+#define _OBJECTS_MANGER_
+
+#include "game_object/game_object.hpp"
 
 #include <iostream>
 #include <vector>
-
-#include "game_object/game_object.hpp"
 
 class objectsManager
 {
@@ -23,3 +24,5 @@ public:
   objectsManager(/* args */);
   ~objectsManager();
 };
+
+#endif

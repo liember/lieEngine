@@ -1,5 +1,7 @@
 #include "speedProperty.hpp"
 
+#include "../../../time_manager/timer.hpp"
+
 void speedProperty::update()
 {
   position->setX(position->getOnlyX() + x * timer::GetDelta());

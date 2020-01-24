@@ -1,4 +1,5 @@
 #include "texturemanager.hpp"
+#include "../core.hpp"
 
 using namespace std;
 

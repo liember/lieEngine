@@ -1,5 +1,7 @@
 #include "mouse.hpp"
 
+#include "../../../core.hpp"
+
 mouse::mouse(PropertyControlSystem *pcs)
 {
   mouseClick = false;

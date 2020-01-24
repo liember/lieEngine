@@ -1,4 +1,4 @@
-#include "textProperty.hpp"
+#include "textureProperty.hpp"
 
 textureProperty::textureProperty(PropertyControlSystem *pcs)
     : property(PROPERTY_TEXTURE)

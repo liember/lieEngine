@@ -1,11 +1,12 @@
-#pragma once
+#ifndef _CORE_
+#define _CORE_
+
+#include "time_manager/timer.hpp"
+#include "objects_manager/objectsManager.hpp"
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-
-#include "objects_manager/objectsManager.hpp"
-#include "time_manager/timer.hpp"
 
 class game
 {
@@ -43,3 +44,5 @@ public:
   game(/* args */);
   ~game();
 };
+
+#endif

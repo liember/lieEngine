@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _MOUSE_
+#define _MOUSE_
 
 #include "../../pcs.hpp"
 
@@ -7,7 +8,7 @@ class mouse : public property
 private:
   int sourceX, sourceY;
   int xmp, ymp;
-  int deltaX, deltaY;
+  //int deltaX, deltaY; is not used
 
   bool mouseClick;
 
@@ -25,3 +26,5 @@ public:
   void update();
   void draw() {}
 };
+
+#endif

@@ -1,15 +1,18 @@
-#pragma once
+#ifndef _TIMER_
+#define _TIMER_
+
 #include <chrono>
 #include <iostream>
 
 #define FPS60 (1.0 / 60)
 
-class timer {
+class timer
+{
 private:
   const double delay;
   double last_render = 0;
   double creationTime;
-  double criticalTime;
+  //double criticalTime; now its not used
   static double deltaTime;
 
 public:
@@ -23,3 +26,5 @@ public:
   static bool timeout(double source, double delay);
   static double GetDelta();
 };
+
+#endif

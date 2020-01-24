@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _CLICK_AREA_PROPERTY_
+#define _CLICK_AREA_PROPERTY_
 
 #include "../../pcs.hpp"
 #include "../mouse_property/mouse.hpp"
@@ -60,3 +61,5 @@ public:
 
   void setBorderColor(int r, int g, int b, int a = 255);
 };
+
+#endif
