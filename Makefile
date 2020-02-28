@@ -12,7 +12,7 @@ CFLAGS := -Wall -g
 # just libraries that project not contain
 C_MODULES = SDL2 SDL2_image SDL2_ttf
 # list of used modules
-MODULES = texman timeman property propman clarp mousep posp spdp objman texp textp gmobj
+MODULES = texman timeman property propman clarp mousep posp spdp texp textp
 LIBS = $(addprefix -l,$(MODULES)) $(addprefix -l,$(C_MODULES))
 
 # name and directory of yor project
@@ -69,8 +69,10 @@ MOD_MAKES := $(addsuffix .lol,$(addprefix $(MODDIR),$(MODULES)))
 EXECUTABLE = $(BINDIR)main
 
 all:dirs $(MOD_MAKES) $(EXECUTABLE)
-	echo lolasfdsaf
-
+	@echo
+	@echo [!][!][!][!][!] COMPILATION SUCSESS [!][!][!][!][!]
+	@echo
+	
 # now its not autoconfigurable dependece
 $(MODDIR)%:
 	echo lol
