@@ -1,6 +1,6 @@
 #include "mouse.hpp"
 
-#include "../../../core.hpp"
+#include "core.hpp"
 
 mouse::mouse(PropertyControlSystem *pcs)
 {
