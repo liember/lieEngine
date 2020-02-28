@@ -1,12 +1,12 @@
 #include "pcs.hpp"
 
-#include "propertyes/click_area_property/clickAreaProperty.hpp"
-#include "propertyes/mouse_property/mouse.hpp"
-#include "propertyes/position_property/positionProperty.hpp"
-#include "propertyes/property/property.hpp"
-#include "propertyes/speed_property/speedProperty.hpp"
-#include "propertyes/text_property/textProperty.hpp"
-#include "propertyes/texture_property/textureProperty.hpp"
+#include "clickAreaProperty.hpp"
+#include "mouse.hpp"
+#include "positionProperty.hpp"
+#include "property.hpp"
+#include "speedProperty.hpp"
+#include "textProperty.hpp"
+#include "textureProperty.hpp"
 
 void PropertyControlSystem::update()
 {
