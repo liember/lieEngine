@@ -1,4 +1,6 @@
 #include "game_object.hpp"
+#include "pcs.hpp"
+#include "objectsManager.hpp"
 
 gameobj::gameobj(const char *name)
 {
