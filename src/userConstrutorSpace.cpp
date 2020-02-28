@@ -1,4 +1,4 @@
-#include "../core/core.hpp"
+#include "core.hpp"
 
 void game::updateGame() {}
 void game::initGame() {}
