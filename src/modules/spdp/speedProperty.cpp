@@ -1,6 +1,6 @@
 #include "speedProperty.hpp"
 
-#include "../../../time_manager/timer.hpp"
+#include "timer.hpp"
 
 void speedProperty::update()
 {
