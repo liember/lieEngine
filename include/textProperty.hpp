@@ -3,6 +3,7 @@
 #include "font.hpp"
 #include "positionProperty.hpp"
 #include "pcs.hpp"
+#include "texturemanager.hpp"
 
 class textProperty : protected font, public property
 {

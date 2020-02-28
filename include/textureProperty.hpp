@@ -2,6 +2,7 @@
 
 #include "pcs.hpp"
 #include "positionProperty.hpp"
+#include "texturemanager.hpp"
 
 class textureProperty : public property
 {
