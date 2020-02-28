@@ -1,6 +1,6 @@
 #include "textProperty.hpp"
 
-#include "../../../core.hpp"
+#include "core.hpp"
 
 void textProperty::init(const char *t)
 {
