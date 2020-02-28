@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "pcs.hpp"
 
 #include "clickAreaProperty.hpp"
