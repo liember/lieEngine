@@ -1,7 +1,6 @@
 #pragma once
 
 #include "timer.hpp"
-#include "objectsManager.hpp"
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL.h>
@@ -17,8 +16,6 @@ private:
 
   static SDL_Window *window;
   static SDL_Renderer *renderer;
-
-  objectsManager gmsManager;
 
   void updateGame();
   void initGame();

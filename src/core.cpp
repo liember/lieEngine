@@ -83,7 +83,6 @@ void game::update()
 {
   gtimer->FrameTimeout();
   gtimer->deltaUpdate();
-  gmsManager.update();
   updateGame();
 }
 
@@ -92,14 +91,12 @@ void game::render()
   SDL_SetRenderDrawColor(renderer, 20, 20, 30, 0);
   SDL_RenderClear(renderer);
   specificRenderBefore();
-  gmsManager.draw();
   specificRenderAfter();
   SDL_RenderPresent(renderer);
 }
 
 void game::clean()
 {
-  gmsManager.destroy();
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
