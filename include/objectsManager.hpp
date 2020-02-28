@@ -1,7 +1,6 @@
-#ifndef _OBJECTS_MANGER_
-#define _OBJECTS_MANGER_
+#pragma once
 
-#include "game_object/game_object.hpp"
+#include "game_object.hpp"
 
 #include <iostream>
 #include <vector>
@@ -24,5 +23,3 @@ public:
   objectsManager(/* args */);
   ~objectsManager();
 };
-
-#endif

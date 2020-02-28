@@ -1,5 +1,4 @@
-#ifndef _FONT_
-#define _FONT_
+#pragma once
 
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL.h>
@@ -19,5 +18,3 @@ public:
   font(const char *p);
   ~font();
 };
-
-#endif

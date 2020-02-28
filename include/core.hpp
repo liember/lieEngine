@@ -1,8 +1,7 @@
-#ifndef _CORE_
-#define _CORE_
+#pragma once
 
-#include "time_manager/timer.hpp"
-#include "objects_manager/objectsManager.hpp"
+#include "timer.hpp"
+#include "objectsManager.hpp"
 
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL.h>
@@ -44,5 +43,3 @@ public:
   game(/* args */);
   ~game();
 };
-
-#endif

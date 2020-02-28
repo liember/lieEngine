@@ -1,5 +1,4 @@
-#ifndef _TIMER_
-#define _TIMER_
+#pragma once
 
 #include <chrono>
 #include <iostream>
@@ -26,5 +25,3 @@ public:
   static bool timeout(double source, double delay);
   static double GetDelta();
 };
-
-#endif

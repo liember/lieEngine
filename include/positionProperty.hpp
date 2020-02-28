@@ -1,7 +1,6 @@
-#ifndef _POSITION_PROPERTY_
-#define _POSITION_PROPERTY_
+#pragma once
 
-#include "../../pcs.hpp"
+#include "pcs.hpp"
 
 class positionProperty : public property
 {
@@ -41,5 +40,3 @@ public:
   positionProperty(PropertyControlSystem *pcs);
   ~positionProperty();
 };
-
-#endif

@@ -1,8 +1,7 @@
-#ifndef _TEXTURE_PROPERTY_
-#define _TEXTURE_PROPERTY_
+#pragma once
 
-#include "../../pcs.hpp"
-#include "../position_property/positionProperty.hpp"
+#include "pcs.hpp"
+#include "positionProperty.hpp"
 
 class textureProperty : public property
 {
@@ -26,5 +25,3 @@ public:
   void set(SDL_Texture *tex);
   void setTextureSize(int s);
 };
-
-#endif

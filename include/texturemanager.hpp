@@ -1,5 +1,4 @@
-#ifndef _TEXTUE_MANAGER_
-#define _TEXTUE_MANAGER_
+#pragma once
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -20,5 +19,3 @@ public:
   texturemanager(/* args */);
   ~texturemanager();
 };
-
-#endif

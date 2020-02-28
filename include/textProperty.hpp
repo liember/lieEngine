@@ -1,9 +1,8 @@
-#ifndef _TEXT_PROPERTY_
-#define _TEXT_PROPERTY_
+#pragma once
 
-#include "font/font.hpp"
-#include "../position_property/positionProperty.hpp"
-#include "../../pcs.hpp"
+#include "font.hpp"
+#include "positionProperty.hpp"
+#include "pcs.hpp"
 
 class textProperty : protected font, public property
 {
@@ -27,5 +26,3 @@ public:
   textProperty(PropertyControlSystem *pcs);
   ~textProperty();
 };
-
-#endif

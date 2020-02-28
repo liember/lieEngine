@@ -1,7 +1,6 @@
-#ifndef _GAME_OBJECT_
-#define _GAME_OBJECT_
+#pragma once
 
-#include "../../property_manager/pcs.hpp"
+#include "pcs.hpp"
 
 #include <string.h>
 #include <iostream>
@@ -21,5 +20,3 @@ public:
   gameobj();
   ~gameobj();
 };
-
-#endif

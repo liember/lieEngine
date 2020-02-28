@@ -1,8 +1,7 @@
-#ifndef _SPEED_PROPERTY_
-#define _SPEED_PROPERTY_
+#pragma once
 
-#include "../../pcs.hpp"
-#include "../position_property/positionProperty.hpp"
+#include "pcs.hpp"
+#include "positionProperty.hpp"
 
 class speedProperty : public property
 {
@@ -22,5 +21,3 @@ public:
   void update();
   void draw();
 };
-
-#endif

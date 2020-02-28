@@ -1,8 +1,7 @@
-#ifndef _PROPERTY_CONTROL_SYSTEM_
-#define _PROPERTY_CONTROL_SYSTEM_
+#pragma once
 
-#include "../texture_manager/texturemanager.hpp"
-#include "propertyes/property/property.hpp"
+#include "texturemanager.hpp"
+#include "property.hpp"
 
 class PropertyControlSystem
 {
@@ -29,5 +28,3 @@ public:
 
   property *getProperty(int id);
 };
-
-#endif

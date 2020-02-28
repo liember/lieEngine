@@ -1,7 +1,6 @@
-#ifndef _MOUSE_
-#define _MOUSE_
+#pragma once
 
-#include "../../pcs.hpp"
+#include "pcs.hpp"
 
 class mouse : public property
 {
@@ -26,5 +25,3 @@ public:
   void update();
   void draw() {}
 };
-
-#endif

@@ -1,10 +1,9 @@
-#ifndef _CLICK_AREA_PROPERTY_
-#define _CLICK_AREA_PROPERTY_
+#pragma once
 
-#include "../../pcs.hpp"
-#include "../mouse_property/mouse.hpp"
-#include "../position_property/positionProperty.hpp"
-#include "../text_property/textProperty.hpp"
+#include "pcs.hpp"
+#include "mouse.hpp"
+#include "positionProperty.hpp"
+#include "textProperty.hpp"
 
 class clickAreaProperty : public property
 {
@@ -61,5 +60,3 @@ public:
 
   void setBorderColor(int r, int g, int b, int a = 255);
 };
-
-#endif
