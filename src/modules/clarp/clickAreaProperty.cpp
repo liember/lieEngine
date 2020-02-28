@@ -1,6 +1,5 @@
 #include "clickAreaProperty.hpp"
-
-#include "../../../core.hpp"
+#include "core.hpp"
 
 clickAreaProperty::clickAreaProperty(PropertyControlSystem *pcs) : paddingX(10), paddingY(60)
 {
