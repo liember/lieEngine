@@ -1,4 +1,4 @@
-#include "core/core.hpp"
+#include "core.hpp"
 #include <iostream>
 
 int main()
