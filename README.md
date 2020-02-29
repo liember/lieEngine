@@ -31,8 +31,10 @@ $ make
 ### Development
 
 This is my personal project. Only I am working on it, and only while it is interesting to me.
-License
+
 ----
+# License
+
 
 MIT
 
