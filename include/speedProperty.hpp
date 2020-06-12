@@ -1,23 +1,24 @@
 #pragma once
 
-#include "pcs.hpp"
+#include "object.hpp"
 #include "positionProperty.hpp"
 
-class speedProperty : public property
+namespace propertyes
 {
-private:
-  double x, y;
-  positionProperty *position;
+  class speed final : public property
+  {
+  private:
+    propertyes::position *pos;
+    int update_status;
 
-public:
-  speedProperty(PropertyControlSystem *pcs);
-  ~speedProperty();
+  public:
+    speed(position *p);
 
-  void set(double dx, double dy);
+    double x, y;
 
-  double getX();
-  double getY();
-
-  void update();
-  void draw();
-};
+    ~speed() override;
+    int GetType() override;
+    void Update() override;
+    int GetUpdateStatus() override;
+  };
+} // namespace propertyes
