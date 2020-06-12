@@ -9,7 +9,7 @@ int position::GetType()
 }
 void position::Update()
 {
-  //throw Except("Position property cant be updateable");
+  throw Except("Position property cant be updateable");
 }
 int position::GetUpdateStatus()
 {

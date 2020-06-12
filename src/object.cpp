@@ -36,7 +36,7 @@ prop_ptr object::StealProperty(int id)
   }
   else
   {
-    //throw Except("Cant find property for stealing");
+    throw Except("Cant find property for stealing");
   }
   return res;
 }

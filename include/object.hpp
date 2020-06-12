@@ -1,5 +1,6 @@
 #pragma once
 
+#include "MyException.hpp"
 #include "property.hpp"
 
 #include <map>

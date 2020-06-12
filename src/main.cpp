@@ -3,9 +3,10 @@
 
 int main()
 {
-    core *gae = new core();
-    while (gae->IsRunning())
+    core game;
+    game.Init();
+    while (game.IsRunning())
     {
-        gae->Update();
+        game.Update();
     }
 }

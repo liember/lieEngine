@@ -1,6 +1,7 @@
 #pragma once
 
 #include "object.hpp"
+#include "MyException.hpp"
 
 namespace propertyes
 {
