@@ -1,8 +1,10 @@
 .PHONY: clean
 .PHONY: all
 
-CC = clang++
-CFLAGS = -Wall -std=c++17 -g SDL2 SDL2_image SDL2_ttf -I include
+#-lSDL2 -lSDL2_image -lSDL2_ttf
+
+CC = g++
+CFLAGS = -Wall -std=c++17 -g -I include
 DEPFLAGS = -MP -MMD 
 DEPDIR = dep/
 
