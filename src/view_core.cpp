@@ -73,23 +73,23 @@ Component::Label::~Label()
 
 // CLICK AREA
 
-ClickArea::ClickArea(const Eventor::Coursor &cours,
-                     const double &x,
-                     const double &y,
-                     const int &w,
-                     const int &h) : x_pos(x),
-                                     y_pos(y),
-                                     width(w),
-                                     height(h),
-                                     mouse(cours)
+Component::ClickArea::ClickArea(const Eventor::Coursor &cours,
+                                const double &x,
+                                const double &y,
+                                const int &w,
+                                const int &h) : x_pos(x),
+                                                y_pos(y),
+                                                width(w),
+                                                height(h),
+                                                mouse(cours)
 {
 }
 
-ClickArea::~ClickArea()
+Component::ClickArea::~ClickArea()
 {
 }
 
-bool ClickArea::Update()
+bool Component::ClickArea::Update()
 {
     int x = mouse.GetX();
     int y = mouse.GetY();
@@ -107,17 +107,17 @@ bool ClickArea::Update()
     }
 }
 
-bool ClickArea::isClecked() const
+bool Component::ClickArea::isClecked() const
 {
     return clicked;
 }
 
-bool ClickArea::isHovered() const
+bool Component::ClickArea::isHovered() const
 {
     return hovered;
 }
 
-bool ClickArea::isHold() const
+bool Component::ClickArea::isHold() const
 {
     return holded;
 }
@@ -267,7 +267,7 @@ void Window::EventUpdate()
     }
 }
 
-void Window::Render(std::unique_ptr<std::vector<Object *>> list)
+void Window::Render(std::vector<Object *> *list)
 {
     SDL_SetRenderDrawColor(renderer, 20, 20, 30, 0);
     SDL_RenderClear(renderer);
@@ -278,4 +278,5 @@ void Window::Render(std::unique_ptr<std::vector<Object *>> list)
     }
 
     SDL_RenderPresent(renderer);
+    delete list;
 }

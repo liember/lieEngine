@@ -1,33 +1,36 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <fstream>
 #include <exception>
+#include <fstream>
 #include <chrono>
 #include <memory>
+#include <string>
+#include <vector>
+#include <array>
+#include <queue>
 
 namespace Core
 {
+    class Exception : virtual public std::exception
+    {
+
+    protected:
+        const std::string error_message;
+
+    public:
+        explicit Exception(const std::string &msg) : error_message(msg)
+        {
+        }
+        virtual ~Exception() throw() {}
+
+        virtual const char *what() const throw()
+        {
+            return error_message.c_str();
+        }
+    };
+
     namespace Eventor
     {
-        class Exception : virtual public std::exception
-        {
-
-        protected:
-            const std::string error_message;
-
-        public:
-            explicit Exception(const std::string &msg) : error_message(msg)
-            {
-            }
-            virtual ~Exception() throw() {}
-
-            virtual const char *what() const throw()
-            {
-                return error_message.c_str();
-            }
-        };
 
         class Timer
         {
@@ -71,7 +74,7 @@ namespace Core
     {
     protected:
         // list of objects what may will rendered
-        std::unique_ptr<std::vector<Object *>> draw;
+        std::vector<Object *> *draw;
 
         // contains while updates update list (every frame)
         std::vector<Object *> objects;
@@ -84,10 +87,11 @@ namespace Core
 
     public:
         // returns elements what marked as drawable
-        std::unique_ptr<std::vector<Object *>> GetDrawList();
+        std::vector<Object *> *GetDrawList();
 
         MinimalCore()
         {
+            draw = new std::vector<Object *>();
             runstatus = true;
         }
 
