@@ -14,20 +14,72 @@
 
 namespace Core
 {
-
-    class Timer
+    namespace Eventor
     {
-    private:
-        double creationTime;
-        double criticalTime;
+        class Timer
+        {
+        private:
+            double creationTime;
+            double criticalTime;
+
+        public:
+            Timer();
+            ~Timer();
+
+            double GetCurrentTime();
+            // returns true if went more time than <dealy>, count from <source>
+            bool Timeout(double source, double delay);
+        };
+
+        class Coursor
+        {
+        private:
+            int xmp, ymp;
+            int deltaX, deltaY;
+
+            bool clicked;
+            bool move;
+            bool hold;
+
+            bool block;
+
+            SDL_Event *ev;
+            SDL_Window *win;
+
+        public:
+            Coursor(SDL_Event *events, SDL_Window *window);
+            ~Coursor();
+
+            void SetPos(int x, int y);
+
+            int GetX() const;
+            int GetY() const;
+
+            bool isClecked() const;
+            bool isMoved() const;
+            bool isHold() const;
+
+            // returns true if mouse have new state
+            bool Update();
+        };
+    } // namespace Eventor
+
+    class Exception : virtual public std::exception
+    {
+
+    protected:
+        const std::string error_message;
 
     public:
-        Timer();
-        ~Timer();
+        explicit Exception(const std::string &msg) : error_message(msg)
+        {
+        }
+        virtual ~Exception() throw() {}
 
-        double GetCurrentTime();
-        // returns true if went more time than <dealy>, count from <source>
-        bool Timeout(double source, double delay);
+        virtual const char *what() const throw()
+        {
+            return error_message.c_str();
+        }
     };
 
     class Object
@@ -42,53 +94,6 @@ namespace Core
         virtual void Update() = 0;
         virtual void Draw() = 0;
         virtual ~Object(){};
-    };
-
-    class Texture
-    {
-    private:
-        void CheckFile(const char *file_name);
-
-        SDL_Texture *_texture;
-        SDL_Renderer *renderer;
-
-    public:
-        void Draw(int x, int y, int width, int height);
-        Texture(std::string file_name, SDL_Renderer *rend);
-        Texture(SDL_Texture *textur, SDL_Renderer *rend);
-        ~Texture();
-    };
-
-    class Coursor
-    {
-    private:
-        int xmp, ymp;
-        int deltaX, deltaY;
-
-        bool clicked;
-        bool move;
-        bool hold;
-
-        bool block;
-
-        SDL_Event *ev;
-        SDL_Window *win;
-
-    public:
-        Coursor(SDL_Event *events, SDL_Window *window);
-        ~Coursor();
-
-        void SetPos(int x, int y);
-
-        int GetX() const;
-        int GetY() const;
-
-        bool isClecked() const;
-        bool isMoved() const;
-        bool isHold() const;
-
-        // returns true if mouse have new state
-        bool Update();
     };
 
     class ObjectsManager
@@ -131,7 +136,7 @@ namespace Core
         int screen_h;
 
         ObjectsManager objecs;
-        Timer timer;
+        Eventor::Timer timer;
 
         SDL_Event event;
         SDL_Window *window;
@@ -150,24 +155,6 @@ namespace Core
 
         MinimalCore(/* args */);
         ~MinimalCore();
-    };
-
-    class Exception : virtual public std::exception
-    {
-
-    protected:
-        const std::string error_message;
-
-    public:
-        explicit Exception(const std::string &msg) : error_message(msg)
-        {
-        }
-        virtual ~Exception() throw() {}
-
-        virtual const char *what() const throw()
-        {
-            return error_message.c_str();
-        }
     };
 
 } // namespace Core

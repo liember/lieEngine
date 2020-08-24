@@ -2,52 +2,14 @@
 
 using namespace Core;
 
-Texture::Texture(std::string file_name, SDL_Renderer *rend)
-{
-    renderer = rend;
-    CheckFile(file_name.c_str());
-    SDL_Surface *tempSurf = IMG_Load(file_name.c_str());
-    _texture = SDL_CreateTextureFromSurface(renderer, tempSurf);
-    SDL_FreeSurface(tempSurf);
-};
-
-Texture::Texture(SDL_Texture *textur, SDL_Renderer *rend)
-{
-    renderer = rend;
-    _texture = textur;
-}
-
-Texture::~Texture()
-{
-    SDL_DestroyTexture(_texture);
-}
-
-void Texture::CheckFile(const char *file_name)
-{
-    std::ifstream file;
-    file.open(file_name);
-    if (!file)
-        throw new std::exception();
-}
-
-void Texture::Draw(int x, int y, int width, int height)
-{
-    SDL_Rect dest;
-    dest.x = x;
-    dest.y = y;
-    dest.w = width;
-    dest.h = height;
-    SDL_RenderCopy(renderer, _texture, nullptr, &dest);
-}
-
-Timer::Timer()
+Eventor::Timer::Timer()
 {
     creationTime = GetCurrentTime();
 }
 
-Timer::~Timer() {}
+Eventor::Timer::~Timer() {}
 
-double Timer::GetCurrentTime()
+double Eventor::Timer::GetCurrentTime()
 {
     using Duration = std::chrono::duration<double>;
     return std::chrono::duration_cast<Duration>(
@@ -55,7 +17,7 @@ double Timer::GetCurrentTime()
         .count();
 }
 
-bool Timer::Timeout(double source, double delay)
+bool Eventor::Timer::Timeout(double source, double delay)
 {
     if (source + delay < GetCurrentTime())
     {
@@ -63,6 +25,60 @@ bool Timer::Timeout(double source, double delay)
     }
     return false;
 }
+
+// COURSOR
+
+Eventor::Coursor::Coursor(SDL_Event *events, SDL_Window *window)
+{
+    ev = events;
+    win = window;
+
+    hold = false;
+    move = false;
+    clicked = false;
+
+    SetPos(0, 0);
+}
+
+Eventor::Coursor::~Coursor() {}
+
+bool Eventor::Coursor::Update()
+{
+    bool news = false;
+    clicked = false;
+    move = false;
+    if (ev->type == SDL_MOUSEMOTION)
+    {
+        news = true;
+        move = true;
+        SDL_GetMouseState(&xmp, &ymp);
+    }
+    if (ev->type == SDL_MOUSEBUTTONDOWN)
+    {
+        news = true;
+        hold = true;
+    }
+    if (ev->type == SDL_MOUSEBUTTONUP)
+    {
+        news = true;
+        hold = false;
+        clicked = true;
+    }
+    return news;
+}
+
+void Eventor::Coursor::SetPos(int x, int y)
+{
+    SDL_WarpMouseInWindow(win, x, y);
+}
+
+int Eventor::Coursor::GetX() const { return xmp; }
+int Eventor::Coursor::GetY() const { return ymp; }
+bool Eventor::Coursor::isClecked() const { return clicked; }
+bool Eventor::Coursor::isMoved() const { return move; }
+bool Eventor::Coursor::isHold() const { return hold; }
+
+// OBJECTS MANGER
 
 ObjectsManager::ObjectsManager() : draw(new std::queue<Object *>())
 {
@@ -199,55 +215,3 @@ void MinimalCore::clean()
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
 }
-
-// COURSOR
-
-Coursor::Coursor(SDL_Event *events, SDL_Window *window)
-{
-    ev = events;
-    win = window;
-
-    hold = false;
-    move = false;
-    clicked = false;
-
-    SetPos(0, 0);
-}
-
-Coursor::~Coursor() {}
-
-bool Coursor::Update()
-{
-    bool news = false;
-    clicked = false;
-    move = false;
-    if (ev->type == SDL_MOUSEMOTION)
-    {
-        news = true;
-        move = true;
-        SDL_GetMouseState(&xmp, &ymp);
-    }
-    if (ev->type == SDL_MOUSEBUTTONDOWN)
-    {
-        news = true;
-        hold = true;
-    }
-    if (ev->type == SDL_MOUSEBUTTONUP)
-    {
-        news = true;
-        hold = false;
-        clicked = true;
-    }
-    return news;
-}
-
-void Coursor::SetPos(int x, int y)
-{
-    SDL_WarpMouseInWindow(win, x, y);
-}
-
-int Coursor::GetX() const { return xmp; }
-int Coursor::GetY() const { return ymp; }
-bool Coursor::isClecked() const { return clicked; }
-bool Coursor::isMoved() const { return move; }
-bool Coursor::isHold() const { return hold; }
