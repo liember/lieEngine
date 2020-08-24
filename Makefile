@@ -5,67 +5,16 @@
 # ------------------------------------------------------------------------------------
 # compiler 
 CC = g++
-# compiler flags
-CFLAGS := -Wall -g
-
-# other modules
-# just libraries that project not contain
-C_MODULES = SDL2 SDL2_image SDL2_ttf
-# list of used modules
-MODULES = texman timeman property propman clarp mousep posp spdp texp textp
-LIBS = $(addprefix -l,$(MODULES)) $(addprefix -l,$(C_MODULES))
-
-# name and directory of yor project
-PROJ := project.cpp
-PROJDIR = project/
-
-# mutable variable for different compile targets
-# se456es
-TARGET ?= test
-
-# name and directory of tests files
-TEST := test.cpp
-TESTDIR = test/
-
-# directory of modules sourses
-MODDIR = $(SRCDIR)modules/
-
-# include and module destination flags
-# and him destinations 
-LIBDIR = libs
-INCDIR = include
-
-# directoryes
+CFLAGS = -Wall -std=c++17 -g -I include
+DEPFLAGS = -MP -MMD 
+DEPDIR = dep/
 OBJDIR = build/
 BINDIR = bin/
 SRCDIR = src/
-
-# necessary flag for compiling 
-# do not touch!!!
-DEPFLAGS := -MP -MMD 
-DEPDIR = dep/
-
-
-############################################ END OF CONFIGUREABLE VARIABLES #################################################
-
-
-# add include flag to include paths
-INCLUDE_FLAG = -I $(INCDIR)
-LIBS_FLAG = -L $(LIBDIR)
-
-# aoutosearch of sources files
-SRC_FILES = $(wildcard $(SRCDIR)*.cpp) $(TARGET)/main.cpp
-
-# autogen of ".o" file dependenses
-OBJ_FILES = $(patsubst $(SRCDIR)%.cpp,$(OBJDIR)%.o,$(SRC_FILES))
-
-# autogen of ".d" file dependenses (DEPDIR)
-DEP_FILES = $(wildcard $(DEPDIR)*.d)
-
-# generate modules dependenses
-MOD_MAKES := $(addsuffix .lol,$(addprefix $(MODDIR),$(MODULES)))
-
-# destination of executeable file
+LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf 
+SRC_FILES := $(wildcard $(SRCDIR)*.cpp)
+OBJ_FILES := $(patsubst $(SRCDIR)%.cpp,$(OBJDIR)%.o,$(SRC_FILES))
+DEP_FILES := $(wildcard $(DEPDIR)*.d)
 EXECUTABLE = $(BINDIR)main
 
 all:dirs $(MOD_MAKES) $(EXECUTABLE)
