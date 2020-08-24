@@ -161,3 +161,121 @@ void Texture::Draw(int x, int y, int width, int height)
     dest.h = height;
     SDL_RenderCopy(renderer, _texture, nullptr, &dest);
 }
+
+// COURSOR
+
+Eventor::Coursor::Coursor(SDL_Event *events, SDL_Window *window)
+{
+    ev = events;
+    win = window;
+
+    hold = false;
+    move = false;
+    clicked = false;
+
+    SetPos(0, 0);
+}
+
+Eventor::Coursor::~Coursor() {}
+
+bool Eventor::Coursor::Update()
+{
+    bool news = false;
+    clicked = false;
+    move = false;
+    if (ev->type == SDL_MOUSEMOTION)
+    {
+        news = true;
+        move = true;
+        SDL_GetMouseState(&xmp, &ymp);
+    }
+    if (ev->type == SDL_MOUSEBUTTONDOWN)
+    {
+        news = true;
+        hold = true;
+    }
+    if (ev->type == SDL_MOUSEBUTTONUP)
+    {
+        news = true;
+        hold = false;
+        clicked = true;
+    }
+    return news;
+}
+
+void Eventor::Coursor::SetPos(int x, int y)
+{
+    SDL_WarpMouseInWindow(win, x, y);
+}
+
+int Eventor::Coursor::GetX() const { return xmp; }
+int Eventor::Coursor::GetY() const { return ymp; }
+bool Eventor::Coursor::isClecked() const { return clicked; }
+bool Eventor::Coursor::isMoved() const { return move; }
+bool Eventor::Coursor::isHold() const { return hold; }
+
+// WINDOW
+
+Window::Window(const char *title, int xpos, int ypos, int width,
+               int height, bool windowed)
+{
+
+    screen_h = height;
+    screen_w = width;
+
+    int flags = 0;
+
+    if (windowed)
+    {
+        flags = SDL_WINDOW_FULLSCREEN;
+    }
+
+    if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
+    {
+        TTF_Init();
+        win = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+        renderer = SDL_CreateRenderer(win, -1, 0);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        isrunning = true;
+    }
+    else
+    {
+        isrunning = false;
+    }
+}
+
+Window::~Window()
+{
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(win);
+    SDL_Quit();
+    TTF_Quit();
+}
+
+void Window::EventUpdate()
+{
+    SDL_PollEvent(&event);
+
+    switch (event.type)
+    {
+    case SDL_QUIT:
+        isrunning = false;
+        break;
+
+    default:
+        break;
+    }
+}
+
+void Window::Render(std::unique_ptr<std::vector<Object *>> list)
+{
+    SDL_SetRenderDrawColor(renderer, 20, 20, 30, 0);
+    SDL_RenderClear(renderer);
+
+    for (auto &&i : *list)
+    {
+        i->Draw();
+    }
+
+    SDL_RenderPresent(renderer);
+}

@@ -1,13 +1,51 @@
 #pragma once
 
-#include <string>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "core.hpp"
 
 namespace Core
 {
+
     namespace View
     {
+        namespace Eventor
+        {
+            class Coursor
+            {
+            private:
+                int xmp, ymp;
+                int deltaX, deltaY;
+
+                bool clicked;
+                bool move;
+                bool hold;
+
+                bool block;
+
+                SDL_Event *ev;
+                SDL_Window *win;
+
+            public:
+                Coursor(SDL_Event *events, SDL_Window *window);
+                ~Coursor();
+
+                void SetPos(int x, int y);
+
+                int GetX() const;
+                int GetY() const;
+
+                bool isClecked() const;
+                bool isMoved() const;
+                bool isHold() const;
+
+                // returns true if mouse have new state
+                bool Update();
+            };
+        } // namespace Eventor
+
         class Texture
         {
         private:
@@ -87,6 +125,27 @@ namespace Core
                 ~Label();
             };
         } // namespace Component
+
+        class Window
+        {
+        private:
+            SDL_Event event;
+            SDL_Window *win;
+            SDL_Renderer *renderer;
+
+            int screen_w;
+            int screen_h;
+
+            bool isrunning;
+
+        public:
+            void Render(std::unique_ptr<std::vector<Object *>> list);
+            void EventUpdate();
+
+            Window(const char *title, int xpos, int ypos, int width, int height,
+                   bool windowed);
+            ~Window();
+        };
 
     } // namespace View
 
