@@ -5,17 +5,30 @@
 #include <fstream>
 #include <exception>
 #include <chrono>
-#include <queue>
 #include <memory>
-
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 
 namespace Core
 {
     namespace Eventor
     {
+        class Exception : virtual public std::exception
+        {
+
+        protected:
+            const std::string error_message;
+
+        public:
+            explicit Exception(const std::string &msg) : error_message(msg)
+            {
+            }
+            virtual ~Exception() throw() {}
+
+            virtual const char *what() const throw()
+            {
+                return error_message.c_str();
+            }
+        };
+
         class Timer
         {
         private:
@@ -30,57 +43,7 @@ namespace Core
             // returns true if went more time than <dealy>, count from <source>
             bool Timeout(double source, double delay);
         };
-
-        class Coursor
-        {
-        private:
-            int xmp, ymp;
-            int deltaX, deltaY;
-
-            bool clicked;
-            bool move;
-            bool hold;
-
-            bool block;
-
-            SDL_Event *ev;
-            SDL_Window *win;
-
-        public:
-            Coursor(SDL_Event *events, SDL_Window *window);
-            ~Coursor();
-
-            void SetPos(int x, int y);
-
-            int GetX() const;
-            int GetY() const;
-
-            bool isClecked() const;
-            bool isMoved() const;
-            bool isHold() const;
-
-            // returns true if mouse have new state
-            bool Update();
-        };
     } // namespace Eventor
-
-    class Exception : virtual public std::exception
-    {
-
-    protected:
-        const std::string error_message;
-
-    public:
-        explicit Exception(const std::string &msg) : error_message(msg)
-        {
-        }
-        virtual ~Exception() throw() {}
-
-        virtual const char *what() const throw()
-        {
-            return error_message.c_str();
-        }
-    };
 
     class Object
     {
@@ -99,62 +62,45 @@ namespace Core
     class ObjectsManager
     {
     private:
-        std::vector<Object *> update_list;
-
-        // queue on draw
-        std::unique_ptr<std::queue<Object *>> draw;
-
-        // contains while updates update list (every frame)
-        std::vector<Object *> objects;
-
-        int max_update_prior; // set automaticly
-        int cur_update;       // from 0 up to max_update_prior
-
     public:
-        // update objects and fill draw queue
-        void Update();
-
-        // draw all elements in queue
-        void Draw();
-
-        // add element to update list
-        void Add(Object *p);
-
-        // delete all elements in update list
-        void DestroyAll();
-
         ObjectsManager();
         ~ObjectsManager();
     };
 
     class MinimalCore
     {
+    protected:
+        // list of objects what may will rendered
+        std::unique_ptr<std::vector<Object *>> draw;
+
+        // contains while updates update list (every frame)
+        std::vector<Object *> objects;
+
     private:
-        bool isrunning;
+        int max_update_prior; // set automaticly
+        int cur_update;       // from 0 up to max_update_prior
 
-        int screen_w;
-        int screen_h;
-
-        ObjectsManager objecs;
-        Eventor::Timer timer;
-
-        SDL_Event event;
-        SDL_Window *window;
-        SDL_Renderer *renderer;
+        bool runstatus;
 
     public:
-        void initEngine(const char *title, int xpos, int ypos, int width, int height,
-                        bool windowed);
-        void handleevents();
+        // returns elements what marked as drawable
+        std::unique_ptr<std::vector<Object *>> GetDrawList();
 
-        void update();
-        void render();
+        MinimalCore()
+        {
+            runstatus = true;
+        }
+
+        // update objects and fill draw list
+        void Update();
+
+        // delete all elements in update list
         void clean();
 
-        bool running() { return isrunning; }
+        // add element to update list
+        void Add(Object *p);
 
-        MinimalCore(/* args */);
-        ~MinimalCore();
+        bool running() { return runstatus; }
     };
 
 } // namespace Core
