@@ -2,13 +2,13 @@
 .PHONY: clean
 .PHONY: all
 CC = g++
-CFLAGS = -Wall -g
+CFLAGS = -Wall -std=c++17 -g -I include
 DEPFLAGS = -MP -MMD 
 DEPDIR = dep/
 OBJDIR = build/
 BINDIR = bin/
 SRCDIR = src/
-LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf
+LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf 
 SRC_FILES := $(wildcard $(SRCDIR)*.cpp)
 OBJ_FILES := $(patsubst $(SRCDIR)%.cpp,$(OBJDIR)%.o,$(SRC_FILES))
 DEP_FILES := $(wildcard $(DEPDIR)*.d)
