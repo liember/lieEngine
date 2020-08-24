@@ -7,9 +7,15 @@ Texture::Texture(std::string file_name, SDL_Renderer *rend)
     renderer = rend;
     CheckFile(file_name.c_str());
     SDL_Surface *tempSurf = IMG_Load(file_name.c_str());
-    SDL_Texture *tex = SDL_CreateTextureFromSurface(renderer, tempSurf);
+    _texture = SDL_CreateTextureFromSurface(renderer, tempSurf);
     SDL_FreeSurface(tempSurf);
 };
+
+Texture::Texture(SDL_Texture *textur, SDL_Renderer *rend)
+{
+    renderer = rend;
+    _texture = textur;
+}
 
 Texture::~Texture()
 {
@@ -58,7 +64,7 @@ bool Timer::Timeout(double source, double delay)
     return false;
 }
 
-ObjectsManager::ObjectsManager() : draw(new std::queue<Object &>())
+ObjectsManager::ObjectsManager() : draw(new std::queue<Object *>())
 {
 }
 
@@ -78,7 +84,7 @@ void ObjectsManager::Update()
 
         if (i->draw)
         {
-            draw->push(*i);
+            draw->push(i);
         }
     }
 
@@ -94,10 +100,14 @@ void ObjectsManager::Update()
 
 void ObjectsManager::Draw()
 {
-    while (!draw->empty())
+    std::unique_ptr<std::queue<Object *>> draw_tmp = std::move(draw);
+    std::unique_ptr<std::queue<Object *>> new_draw(new std::queue<Object *>());
+    draw.swap(new_draw);
+
+    while (!draw_tmp->empty())
     {
-        Object &obj = draw->front();
-        draw->pop();
+        draw_tmp->front()->Draw();
+        draw_tmp->pop();
     }
 }
 
@@ -114,9 +124,9 @@ void ObjectsManager::DestroyAll()
     }
 }
 
-Game::Game(/* args */) {}
+MinimalCore::MinimalCore(/* args */) {}
 
-Game::~Game()
+MinimalCore::~MinimalCore()
 {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -124,8 +134,8 @@ Game::~Game()
     TTF_Quit();
 }
 
-void Game::initEngine(const char *title, int xpos, int ypos, int width,
-                      int height, bool windowed)
+void MinimalCore::initEngine(const char *title, int xpos, int ypos, int width,
+                             int height, bool windowed)
 {
 
     screen_h = height;
@@ -150,10 +160,9 @@ void Game::initEngine(const char *title, int xpos, int ypos, int width,
     {
         isrunning = false;
     }
-    initGame();
 }
 
-void Game::handleevents()
+void MinimalCore::handleevents()
 {
     SDL_PollEvent(&event);
 
@@ -170,28 +179,75 @@ void Game::handleevents()
 
 int i = 0;
 
-void Game::update()
+void MinimalCore::update()
 {
     objecs.Update();
-    updateGame();
 }
 
-void Game::render()
+void MinimalCore::render()
 {
     SDL_SetRenderDrawColor(renderer, 20, 20, 30, 0);
     SDL_RenderClear(renderer);
-
-    specificRenderBefore();
     objecs.Draw();
-    specificRenderAfter();
-
     SDL_RenderPresent(renderer);
 }
 
-void Game::clean()
+void MinimalCore::clean()
 {
     objecs.DestroyAll();
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
 }
+
+// COURSOR
+
+Coursor::Coursor(SDL_Event *events, SDL_Window *window)
+{
+    ev = events;
+    win = window;
+
+    hold = false;
+    move = false;
+    clicked = false;
+
+    SetPos(0, 0);
+}
+
+Coursor::~Coursor() {}
+
+bool Coursor::Update()
+{
+    bool news = false;
+    clicked = false;
+    move = false;
+    if (ev->type == SDL_MOUSEMOTION)
+    {
+        news = true;
+        move = true;
+        SDL_GetMouseState(&xmp, &ymp);
+    }
+    if (ev->type == SDL_MOUSEBUTTONDOWN)
+    {
+        news = true;
+        hold = true;
+    }
+    if (ev->type == SDL_MOUSEBUTTONUP)
+    {
+        news = true;
+        hold = false;
+        clicked = true;
+    }
+    return news;
+}
+
+void Coursor::SetPos(int x, int y)
+{
+    SDL_WarpMouseInWindow(win, x, y);
+}
+
+int Coursor::GetX() const { return xmp; }
+int Coursor::GetY() const { return ymp; }
+bool Coursor::isClecked() const { return clicked; }
+bool Coursor::isMoved() const { return move; }
+bool Coursor::isHold() const { return hold; }

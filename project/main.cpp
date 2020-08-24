@@ -3,8 +3,8 @@
 
 int main()
 {
-  Core::Game gae;
-  gae.initEngine("lie and ember", SDL_WINDOWPOS_CENTERED,
+  Core::MinimalCore gae;
+  gae.initEngine("LieEngine v2.3", SDL_WINDOWPOS_CENTERED,
                  SDL_WINDOWPOS_CENTERED, 1200, 600, false);
   while (gae.running())
   {

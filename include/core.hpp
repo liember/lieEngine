@@ -54,9 +54,41 @@ namespace Core
 
     public:
         void Draw(int x, int y, int width, int height);
-
         Texture(std::string file_name, SDL_Renderer *rend);
+        Texture(SDL_Texture *textur, SDL_Renderer *rend);
         ~Texture();
+    };
+
+    class Coursor
+    {
+    private:
+        int xmp, ymp;
+        int deltaX, deltaY;
+
+        bool clicked;
+        bool move;
+        bool hold;
+
+        bool block;
+
+        SDL_Event *ev;
+        SDL_Window *win;
+
+    public:
+        Coursor(SDL_Event *events, SDL_Window *window);
+        ~Coursor();
+
+        void SetPos(int x, int y);
+
+        int GetX() const;
+        int GetY() const;
+
+        bool isClecked() const;
+        bool isMoved() const;
+        bool isHold() const;
+
+        // returns true if mouse have new state
+        bool Update();
     };
 
     class ObjectsManager
@@ -65,10 +97,10 @@ namespace Core
         std::vector<Object *> update_list;
 
         // queue on draw
-        std::unique_ptr<std::queue<Object &>> draw;
+        std::unique_ptr<std::queue<Object *>> draw;
 
         // contains while updates update list (every frame)
-        std::vector<Object &> objects;
+        std::vector<Object *> objects;
 
         int max_update_prior; // set automaticly
         int cur_update;       // from 0 up to max_update_prior
@@ -90,11 +122,13 @@ namespace Core
         ~ObjectsManager();
     };
 
-    class Game
+    class MinimalCore
     {
     private:
         bool isrunning;
-        int screen_w, screen_h;
+
+        int screen_w;
+        int screen_h;
 
         ObjectsManager objecs;
         Timer timer;
@@ -102,11 +136,6 @@ namespace Core
         SDL_Event event;
         SDL_Window *window;
         SDL_Renderer *renderer;
-
-        void updateGame();
-        void initGame();
-        void specificRenderBefore();
-        void specificRenderAfter();
 
     public:
         void initEngine(const char *title, int xpos, int ypos, int width, int height,
@@ -117,10 +146,28 @@ namespace Core
         void render();
         void clean();
 
-        bool running();
+        bool running() { return isrunning; }
 
-        Game(/* args */);
-        ~Game();
+        MinimalCore(/* args */);
+        ~MinimalCore();
+    };
+
+    class Exception : virtual public std::exception
+    {
+
+    protected:
+        const std::string error_message;
+
+    public:
+        explicit Exception(const std::string &msg) : error_message(msg)
+        {
+        }
+        virtual ~Exception() throw() {}
+
+        virtual const char *what() const throw()
+        {
+            return error_message.c_str();
+        }
     };
 
 } // namespace Core
