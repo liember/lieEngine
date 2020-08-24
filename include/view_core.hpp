@@ -8,9 +8,46 @@
 
 namespace Core
 {
-
     namespace View
     {
+        class Texture
+        {
+        private:
+            void CheckFile(const char *file_name);
+
+            SDL_Texture *_texture;
+            SDL_Renderer *renderer;
+
+        public:
+            void Draw(int x, int y, int width, int height);
+            Texture(std::string file_name, SDL_Renderer *rend);
+            Texture(SDL_Texture *textur, SDL_Renderer *rend);
+            ~Texture();
+        };
+
+        class Window
+        {
+        private:
+            SDL_Event event;
+            SDL_Window *win;
+            SDL_Renderer *renderer;
+
+            int screen_w;
+            int screen_h;
+
+            bool isrunning;
+
+        public:
+            void Render(std::vector<Object *> *list);
+            void EventUpdate();
+
+            bool running() { return isrunning; }
+
+            explicit Window(const char *title, int xpos, int ypos, int width, int height,
+                            bool windowed);
+            ~Window();
+        };
+
         namespace Eventor
         {
             class Coursor
@@ -46,50 +83,6 @@ namespace Core
             };
         } // namespace Eventor
 
-        class Texture
-        {
-        private:
-            void CheckFile(const char *file_name);
-
-            SDL_Texture *_texture;
-            SDL_Renderer *renderer;
-
-        public:
-            void Draw(int x, int y, int width, int height);
-            Texture(std::string file_name, SDL_Renderer *rend);
-            Texture(SDL_Texture *textur, SDL_Renderer *rend);
-            ~Texture();
-        };
-
-        class ClickArea
-        {
-        private:
-            const double &x_pos;
-            const double &y_pos;
-            const int &width;
-            const int &height;
-
-            const Eventor::Coursor &mouse;
-
-            bool clicked;
-            bool holded;
-            bool hovered;
-
-        public:
-            bool isClecked() const;
-            bool isHovered() const;
-            bool isHold() const;
-
-            bool Update();
-
-            ClickArea(const Eventor::Coursor &cours,
-                      const double &x,
-                      const double &y,
-                      const int &w,
-                      const int &h);
-            ~ClickArea();
-        };
-
         namespace Component
         {
             class Label
@@ -124,28 +117,36 @@ namespace Core
                 Label(std::string font_file, SDL_Renderer *ren, std::string val, double &x, double &y);
                 ~Label();
             };
+
+            class ClickArea
+            {
+            private:
+                const double &x_pos;
+                const double &y_pos;
+                const int &width;
+                const int &height;
+
+                const Eventor::Coursor &mouse;
+
+                bool clicked;
+                bool holded;
+                bool hovered;
+
+            public:
+                bool isClecked() const;
+                bool isHovered() const;
+                bool isHold() const;
+
+                bool Update();
+
+                ClickArea(const Eventor::Coursor &cours,
+                          const double &x,
+                          const double &y,
+                          const int &w,
+                          const int &h);
+                ~ClickArea();
+            };
         } // namespace Component
-
-        class Window
-        {
-        private:
-            SDL_Event event;
-            SDL_Window *win;
-            SDL_Renderer *renderer;
-
-            int screen_w;
-            int screen_h;
-
-            bool isrunning;
-
-        public:
-            void Render(std::unique_ptr<std::vector<Object *>> list);
-            void EventUpdate();
-
-            Window(const char *title, int xpos, int ypos, int width, int height,
-                   bool windowed);
-            ~Window();
-        };
 
     } // namespace View
 

@@ -26,15 +26,19 @@ bool Eventor::Timer::Timeout(double source, double delay)
     return false;
 }
 
-// OBJECTS MANGER
+// MIN CORE
 
-std::unique_ptr<std::vector<Object *>> MinimalCore::GetDrawList()
+std::vector<Object *> *MinimalCore::GetDrawList()
 {
-    std::unique_ptr<std::vector<Object *>> draw_tmp = std::move(draw);
-    std::unique_ptr<std::vector<Object *>> new_draw(new std::vector<Object *>());
-    draw.swap(new_draw);
+    if (draw == nullptr)
+    {
+        throw Exception("nullptr draw list");
+    }
 
-    return std::move(draw_tmp);
+    std::vector<Object *> *tmp_draw = draw;
+    draw = new std::vector<Object *>();
+
+    return tmp_draw;
 }
 
 void MinimalCore::Add(Object *p)
