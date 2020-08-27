@@ -1,42 +1,118 @@
 #pragma once
 
-#include "timer.hpp"
+#include <exception>
+#include <fstream>
+#include <chrono>
+#include <memory>
+#include <string>
+#include <vector>
+#include <array>
+#include <queue>
 
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
-
-class game
+namespace lieEngine
 {
-private:
-  bool isrunning;
-  int cnt = 0;
+    class Exception : virtual public std::exception
+    {
 
-  int w, h;
+    protected:
+        const std::string error_message;
 
-  static SDL_Window *window;
-  static SDL_Renderer *renderer;
+    public:
+        explicit Exception(const std::string &msg) : error_message(msg)
+        {
+        }
+        virtual ~Exception() throw() {}
 
-  void updateGame();
-  void initGame();
-  void specificRenderBefore();
-  void specificRenderAfter();
+        virtual const char *what() const throw()
+        {
+            return error_message.c_str();
+        }
+    };
 
-public:
-  timer *gtimer;
-  static SDL_Window *getWindow();
-  static SDL_Renderer *getRenderer();
-  static SDL_Event event;
+    namespace Eventor
+    {
 
-  void initEngine(const char *title, int xpos, int ypos, int width, int height,
-                  bool windowed);
-  void handleevents();
+        class Timer
+        {
+        private:
+            double creationTime;
+            double criticalTime;
 
-  void update();
-  void render();
-  void clean();
+        public:
+            Timer();
+            ~Timer();
 
-  bool running();
-  game(/* args */);
-  ~game();
-};
+            double GetCurrentTime();
+            // returns true if went more time than <dealy>, count from <source>
+            bool Timeout(double source, double delay);
+        };
+    } // namespace Eventor
+
+    class Object
+    {
+    private:
+        int update_prior; // high - true / low - false
+    public:
+        bool isLife;
+        bool update;
+
+        bool draw;
+
+        int setUpdatePrior(int val)
+        {
+            val < 1 ? update_prior = 1 : update_prior = val;
+            return update_prior;
+        }
+
+        int getUpdatePrior()
+        {
+            return update_prior;
+        }
+
+        virtual void Update() = 0;
+        virtual void Draw() = 0;
+        virtual ~Object(){};
+
+        Object()
+        {
+            update_prior = 1;
+            draw = true;
+            update = true;
+            isLife = true;
+        }
+    };
+
+    class Core
+    {
+    protected:
+        // contains while updates update list (every frame)
+        std::vector<Object *> objects;
+
+    private:
+        int max_update_prior; // set automaticly
+        int cur_update;       // from 0 up to max_update_prior
+
+        bool runstatus;
+
+    public:
+        // returns elements what marked as drawable
+        std::vector<Object *> *GetDrawList();
+
+        Core()
+        {
+            runstatus = true;
+        }
+
+        // update objects and fill draw list
+        void Update();
+
+        // delete all elements in update list
+        void clean();
+
+        // add element to update list
+        void Add(Object *p);
+
+        bool running() { return runstatus; }
+    };
+
+} // namespace lieEngine

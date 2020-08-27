@@ -1,109 +1,81 @@
 #include "core.hpp"
 
-using namespace std;
+using namespace lieEngine;
 
-SDL_Renderer *game::renderer = nullptr;
-SDL_Window *game::window = nullptr;
-
-SDL_Event game::event;
-
-game::game(/* args */) {}
-
-game::~game()
+Eventor::Timer::Timer()
 {
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
-  SDL_Quit();
-  TTF_Quit();
+    creationTime = GetCurrentTime();
 }
 
-void game::initEngine(const char *title, int xpos, int ypos, int width,
-                      int height, bool windowed)
+Eventor::Timer::~Timer() {}
+
+double Eventor::Timer::GetCurrentTime()
 {
+    using Duration = std::chrono::duration<double>;
+    return std::chrono::duration_cast<Duration>(
+               std::chrono::high_resolution_clock::now().time_since_epoch())
+        .count();
+}
 
-  h = height;
-  w = width;
-
-  gtimer = new timer(0.005);
-
-  int flags = 0;
-
-  if (windowed)
-  {
-    flags = SDL_WINDOW_FULLSCREEN;
-  }
-
-  if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
-  {
-    TTF_Init();
-    cout << "[?] subsystem inited" << endl;
-
-    window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-
-    if (window)
+bool Eventor::Timer::Timeout(double source, double delay)
+{
+    if (source + delay < GetCurrentTime())
     {
-      cout << "[?] Window created" << endl;
+        return true;
+    }
+    return false;
+}
+
+// MIN CORE
+
+std::vector<Object *> *Core::GetDrawList()
+{
+    // list of objects what may will rendered
+    std::vector<Object *> *draw = new std::vector<Object *>();
+    if (draw == nullptr)
+    {
+        throw Exception("nullptr draw list");
     }
 
-    renderer = SDL_CreateRenderer(window, -1, 0);
-    if (renderer)
+    for (auto &&i : objects)
     {
-      SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-      cout << "[?] Renderer created" << endl;
+        if (i->draw)
+        {
+            draw->push_back(i);
+        }
+    }
+    return draw;
+}
+
+void Core::Add(Object *p)
+{
+    objects.push_back(p);
+}
+
+void Core::clean()
+{
+    for (auto &&i : objects)
+    {
+        delete i;
+    }
+}
+
+void Core::Update()
+{
+    for (auto &&i : objects)
+    {
+        if (cur_update % i->getUpdatePrior() == 0)
+        {
+            i->Update();
+        }
     }
 
-    isrunning = true;
-  }
-  else
-  {
-    isrunning = false;
-  }
-
-  initGame();
+    if (cur_update < max_update_prior)
+    {
+        cur_update++;
+    }
+    else
+    {
+        cur_update = 0;
+    }
 }
-
-void game::handleevents()
-{
-  SDL_PollEvent(&event);
-
-  switch (event.type)
-  {
-  case SDL_QUIT:
-    isrunning = false;
-    break;
-
-  default:
-    break;
-  }
-}
-
-int i = 0;
-
-void game::update()
-{
-  gtimer->FrameTimeout();
-  gtimer->deltaUpdate();
-  updateGame();
-}
-
-void game::render()
-{
-  SDL_SetRenderDrawColor(renderer, 20, 20, 30, 0);
-  SDL_RenderClear(renderer);
-  specificRenderBefore();
-  specificRenderAfter();
-  SDL_RenderPresent(renderer);
-}
-
-void game::clean()
-{
-  SDL_DestroyWindow(window);
-  SDL_DestroyRenderer(renderer);
-  SDL_Quit();
-}
-
-bool game::running() { return isrunning; }
-
-SDL_Renderer *game::getRenderer() { return renderer; }
-
-SDL_Window *game::getWindow() { return window; }
