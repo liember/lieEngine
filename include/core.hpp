@@ -9,7 +9,7 @@
 #include <array>
 #include <queue>
 
-namespace Core
+namespace lieEngine
 {
     class Exception : virtual public std::exception
     {
@@ -50,32 +50,41 @@ namespace Core
 
     class Object
     {
+    private:
+        int update_prior; // high - true / low - false
     public:
-        int draw_id;
         bool isLife;
         bool update;
+
         bool draw;
-        bool update_prior; // high - true / low - false
+
+        int setUpdatePrior(int val)
+        {
+            val < 1 ? update_prior = 1 : update_prior = val;
+            return update_prior;
+        }
+
+        int getUpdatePrior()
+        {
+            return update_prior;
+        }
 
         virtual void Update() = 0;
         virtual void Draw() = 0;
         virtual ~Object(){};
+
+        Object()
+        {
+            update_prior = 1;
+            draw = true;
+            update = true;
+            isLife = true;
+        }
     };
 
-    class ObjectsManager
-    {
-    private:
-    public:
-        ObjectsManager();
-        ~ObjectsManager();
-    };
-
-    class MinimalCore
+    class Core
     {
     protected:
-        // list of objects what may will rendered
-        std::vector<Object *> *draw;
-
         // contains while updates update list (every frame)
         std::vector<Object *> objects;
 
@@ -89,9 +98,8 @@ namespace Core
         // returns elements what marked as drawable
         std::vector<Object *> *GetDrawList();
 
-        MinimalCore()
+        Core()
         {
-            draw = new std::vector<Object *>();
             runstatus = true;
         }
 
@@ -107,4 +115,4 @@ namespace Core
         bool running() { return runstatus; }
     };
 
-} // namespace Core
+} // namespace lieEngine

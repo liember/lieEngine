@@ -1,6 +1,6 @@
 #include "core.hpp"
 
-using namespace Core;
+using namespace lieEngine;
 
 Eventor::Timer::Timer()
 {
@@ -28,25 +28,31 @@ bool Eventor::Timer::Timeout(double source, double delay)
 
 // MIN CORE
 
-std::vector<Object *> *MinimalCore::GetDrawList()
+std::vector<Object *> *Core::GetDrawList()
 {
+    // list of objects what may will rendered
+    std::vector<Object *> *draw = new std::vector<Object *>();
     if (draw == nullptr)
     {
         throw Exception("nullptr draw list");
     }
 
-    std::vector<Object *> *tmp_draw = draw;
-    draw = new std::vector<Object *>();
-
-    return tmp_draw;
+    for (auto &&i : objects)
+    {
+        if (i->draw)
+        {
+            draw->push_back(i);
+        }
+    }
+    return draw;
 }
 
-void MinimalCore::Add(Object *p)
+void Core::Add(Object *p)
 {
     objects.push_back(p);
 }
 
-void MinimalCore::clean()
+void Core::clean()
 {
     for (auto &&i : objects)
     {
@@ -54,18 +60,13 @@ void MinimalCore::clean()
     }
 }
 
-void MinimalCore::Update()
+void Core::Update()
 {
     for (auto &&i : objects)
     {
-        if (cur_update % i->update_prior == 0)
+        if (cur_update % i->getUpdatePrior() == 0)
         {
             i->Update();
-        }
-
-        if (i->draw)
-        {
-            draw->push_back(i);
         }
     }
 
