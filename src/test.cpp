@@ -50,7 +50,7 @@ int main()
   lieEngine::Core gae;
   lieEngine::View::Window *win = new lieEngine::View::Window("LieEngine v2.3", 300, 200, 1200, 700, false);
 
-  gae.Add(new obj("assets/b2.png", win->getRenderer(), "Flosier", "assets/font.ttf"));
+  gae.Add(new obj("assets/images/birds/b2.png", win->getRenderer(), "Flosier", "assets/fonts/font.ttf"));
 
   int counter = 1;
   int update_draw_list_delay = 30;
