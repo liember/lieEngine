@@ -6,25 +6,10 @@
 
 #include "core.hpp"
 
-namespace Core
+namespace lieEngine
 {
     namespace View
     {
-        class Texture
-        {
-        private:
-            void CheckFile(const char *file_name);
-
-            SDL_Texture *_texture;
-            SDL_Renderer *renderer;
-
-        public:
-            void Draw(int x, int y, int width, int height);
-            Texture(std::string file_name, SDL_Renderer *rend);
-            Texture(SDL_Texture *textur, SDL_Renderer *rend);
-            ~Texture();
-        };
-
         class Window
         {
         private:
@@ -40,6 +25,8 @@ namespace Core
         public:
             void Render(std::vector<Object *> *list);
             void EventUpdate();
+
+            SDL_Renderer *getRenderer() { return renderer; }
 
             bool running() { return isrunning; }
 
@@ -146,8 +133,24 @@ namespace Core
                           const int &h);
                 ~ClickArea();
             };
+
+            class Texture
+            {
+            private:
+                void CheckFile(const char *file_name);
+
+                SDL_Texture *_texture;
+                SDL_Renderer *renderer;
+
+            public:
+                void Draw(int x, int y, int width, int height);
+                Texture(std::string file_name, SDL_Renderer *rend);
+                Texture(SDL_Texture *textur, SDL_Renderer *rend);
+                ~Texture();
+            };
+
         } // namespace Component
 
     } // namespace View
 
-} // namespace Core
+} // namespace lieEngine

@@ -1,6 +1,6 @@
 #include "view_core.hpp"
 
-using namespace Core::View;
+using namespace lieEngine::View;
 
 void Component::Label::correctTexture()
 {
@@ -28,6 +28,7 @@ void Component::Label::ChangeColor(int r, int g, int b)
     color.r = r;
     color.g = g;
     color.b = b;
+    getTextureText(value.c_str());
 }
 
 void Component::Label::ChangeSize(int w, int h)
@@ -45,8 +46,8 @@ void Component::Label::Move(double x, double y)
 void Component::Label::Draw()
 {
     SDL_Rect buf;
-    buf.x = pos_x;
-    buf.y = pos_y;
+    buf.x = pos_x + x_mv;
+    buf.y = pos_y + y_mv;
     buf.w = dstrect.w;
     buf.h = dstrect.h;
     if (texture)
@@ -124,7 +125,7 @@ bool Component::ClickArea::isHold() const
 
 // TEXTURE
 
-Texture::Texture(std::string file_name, SDL_Renderer *rend)
+Component::Texture::Texture(std::string file_name, SDL_Renderer *rend)
 {
     renderer = rend;
     CheckFile(file_name.c_str());
@@ -133,18 +134,18 @@ Texture::Texture(std::string file_name, SDL_Renderer *rend)
     SDL_FreeSurface(tempSurf);
 };
 
-Texture::Texture(SDL_Texture *textur, SDL_Renderer *rend)
+Component::Texture::Texture(SDL_Texture *textur, SDL_Renderer *rend)
 {
     renderer = rend;
     _texture = textur;
 }
 
-Texture::~Texture()
+Component::Texture::~Texture()
 {
     SDL_DestroyTexture(_texture);
 }
 
-void Texture::CheckFile(const char *file_name)
+void Component::Texture::CheckFile(const char *file_name)
 {
     std::ifstream file;
     file.open(file_name);
@@ -152,7 +153,7 @@ void Texture::CheckFile(const char *file_name)
         throw new std::exception();
 }
 
-void Texture::Draw(int x, int y, int width, int height)
+void Component::Texture::Draw(int x, int y, int width, int height)
 {
     SDL_Rect dest;
     dest.x = x;
@@ -278,5 +279,4 @@ void Window::Render(std::vector<Object *> *list)
     }
 
     SDL_RenderPresent(renderer);
-    delete list;
 }
