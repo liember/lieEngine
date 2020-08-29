@@ -1,5 +1,5 @@
 #include "view_core.hpp"
-
+/*
 using namespace lieEngine::View;
 
 void Component::Label::correctTexture()
@@ -280,3 +280,5 @@ void Window::Render(std::vector<Object *> *list)
 
     SDL_RenderPresent(renderer);
 }
+
+*/
