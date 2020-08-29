@@ -1,27 +1,50 @@
 #include "core.hpp"
 #include <iostream>
 
-int main()
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+int main(void)
 {
-  lieEngine::Core gae;
+  GLFWwindow *window;
 
-  int counter = 1;
-  int update_draw_list_delay = 30;
-  std::vector<lieEngine::Object *> *draw = gae.GetDrawList();
+  /* Initialize the library */
+  if (!glfwInit())
+    return -1;
 
-  while (gae.running())
+  /* Create a windowed mode window and its OpenGL context */
+  window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+  if (!window)
   {
-    gae.Update();
-
-    if (counter >= update_draw_list_delay)
-    {
-      counter = 1;
-      delete draw;
-      draw = gae.GetDrawList();
-    }
-    else
-    {
-      counter++;
-    }
+    glfwTerminate();
+    return -1;
   }
+
+  /* Make the window's context current */
+  glfwMakeContextCurrent(window);
+
+  if (!gladLoadGL())
+  {
+    std::cout << "Pezda\n";
+    return -1;
+  }
+
+  std::cout << "OGL ver:" << GLVersion.major << "." << GLVersion.minor << "\n";
+  glClearColor(0, 1, 0, 1);
+
+  /* Loop until the user closes the window */
+  while (!glfwWindowShouldClose(window))
+  {
+    /* Render here */
+    //    glClear(GL_COLOR_BUFFER_BIT);
+
+    /* Swap front and back buffers */
+    glfwSwapBuffers(window);
+
+    /* Poll for and process events */
+    glfwPollEvents();
+  }
+
+  glfwTerminate();
+  return 0;
 }
