@@ -1,7 +1,7 @@
-#include "view_core.hpp"
+#include "core_view.hpp"
 
 using namespace lieEngine::View;
-
+/*
 void Component::Label::correctTexture()
 {
     int texW = 0;
@@ -215,68 +215,55 @@ bool Eventor::Coursor::isClecked() const { return clicked; }
 bool Eventor::Coursor::isMoved() const { return move; }
 bool Eventor::Coursor::isHold() const { return hold; }
 
+*/
 // WINDOW
 
-Window::Window(const char *title, int xpos, int ypos, int width,
-               int height, bool windowed)
+Window::Window(const char *title, int width, int height)
 {
+    if (!glfwInit())
+        throw Exception("GLFW init error");
 
-    screen_h = height;
-    screen_w = width;
-
-    int flags = 0;
-
-    if (windowed)
+    /* Create a windowed mode window and its OpenGL context */
+    window = glfwCreateWindow(width, height, title, NULL, NULL);
+    if (!window)
     {
-        flags = SDL_WINDOW_FULLSCREEN;
+        throw Exception("GLFW window init error");
     }
 
-    if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    /* Make the window's context current */
+    glfwMakeContextCurrent(window);
+
+    if (!gladLoadGL())
     {
-        TTF_Init();
-        win = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-        renderer = SDL_CreateRenderer(win, -1, 0);
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        isrunning = true;
+        throw Exception("GLAD init error");
     }
-    else
-    {
-        isrunning = false;
-    }
+
+    glViewport(0, 0, width, height);
+    glClearColor(0, 1, 0, 1);
+
+    isrunning = true;
 }
 
 Window::~Window()
 {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(win);
-    SDL_Quit();
-    TTF_Quit();
+    glfwTerminate();
 }
 
 void Window::EventUpdate()
 {
-    SDL_PollEvent(&event);
-
-    switch (event.type)
-    {
-    case SDL_QUIT:
-        isrunning = false;
-        break;
-
-    default:
-        break;
-    }
+    isrunning = !glfwWindowShouldClose(window);
+    glfwPollEvents();
 }
 
-void Window::Render(std::vector<Object *> *list)
-{
-    SDL_SetRenderDrawColor(renderer, 20, 20, 30, 0);
-    SDL_RenderClear(renderer);
-
-    for (auto &&i : *list)
-    {
-        i->Draw();
-    }
-
-    SDL_RenderPresent(renderer);
-}
+// void Window::Render()
+// {
+//     /* Render here */
+//     //glClear(GL_COLOR_BUFFER_BIT);
+//     /* Swap front and back buffers */
+//     //glfwSwapBuffers(window);
+//     /* Poll for and process events */
+// }

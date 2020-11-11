@@ -1,10 +1,11 @@
 #pragma once
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
-#include "core.hpp"
+#include <vector>
+
+#include "exceptions.hpp"
 
 namespace lieEngine
 {
@@ -13,28 +14,20 @@ namespace lieEngine
         class Window
         {
         private:
-            SDL_Event event;
-            SDL_Window *win;
-            SDL_Renderer *renderer;
-
-            int screen_w;
-            int screen_h;
-
+            GLFWwindow *window;
             bool isrunning;
 
         public:
-            void Render(std::vector<Object *> *list);
+            //void Render(std::vector<Object *> *list);
             void EventUpdate();
-
-            SDL_Renderer *getRenderer() { return renderer; }
 
             bool running() { return isrunning; }
 
-            explicit Window(const char *title, int xpos, int ypos, int width, int height,
-                            bool windowed);
+            explicit Window(const char *title, int width, int height);
             ~Window();
         };
 
+        /*
         namespace Eventor
         {
             class Coursor
@@ -151,6 +144,7 @@ namespace lieEngine
 
         } // namespace Component
 
+    */
     } // namespace View
 
 } // namespace lieEngine
