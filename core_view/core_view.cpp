@@ -1,4 +1,4 @@
-#include "view_core.hpp"
+#include "core_view.hpp"
 
 using namespace lieEngine::View;
 /*
@@ -259,11 +259,11 @@ void Window::EventUpdate()
     glfwPollEvents();
 }
 
-void Window::Render(std::vector<Object *> *list)
-{
-    /* Render here */
-    glClear(GL_COLOR_BUFFER_BIT);
-    /* Swap front and back buffers */
-    glfwSwapBuffers(window);
-    /* Poll for and process events */
-}
+// void Window::Render()
+// {
+//     /* Render here */
+//     //glClear(GL_COLOR_BUFFER_BIT);
+//     /* Swap front and back buffers */
+//     //glfwSwapBuffers(window);
+//     /* Poll for and process events */
+// }
