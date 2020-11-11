@@ -3,7 +3,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "core.hpp"
+#include <vector>
+
+#include "exceptions.hpp"
 
 namespace lieEngine
 {
@@ -16,7 +18,7 @@ namespace lieEngine
             bool isrunning;
 
         public:
-            void Render(std::vector<Object *> *list);
+            //void Render(std::vector<Object *> *list);
             void EventUpdate();
 
             bool running() { return isrunning; }
