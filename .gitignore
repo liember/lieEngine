@@ -62,3 +62,7 @@ _deps
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/vscode,cmake,c++
+
+build/
+
+.vscode/
