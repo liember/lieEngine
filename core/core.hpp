@@ -1,6 +1,5 @@
 #pragma once
 
-#include <exception>
 #include <fstream>
 #include <chrono>
 #include <memory>
@@ -9,29 +8,12 @@
 #include <array>
 #include <queue>
 
+#include "exceptions.hpp"
+
 namespace lieEngine
 {
-    class Exception : virtual public std::exception
-    {
-
-    protected:
-        const std::string error_message;
-
-    public:
-        explicit Exception(const std::string &msg) : error_message(msg)
-        {
-        }
-        virtual ~Exception() throw() {}
-
-        virtual const char *what() const throw()
-        {
-            return error_message.c_str();
-        }
-    };
-
     namespace Eventor
     {
-
         class Timer
         {
         private:
