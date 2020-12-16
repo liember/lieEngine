@@ -12,5 +12,5 @@ add_subdirectory(core)
 target_link_libraries(${PROJECT_NAME} core)
 
 add_subdirectory(core_view)
-target_link_libraries(${PROJECT_NAME} core_view)
+add_subdirectory(tests)
 
