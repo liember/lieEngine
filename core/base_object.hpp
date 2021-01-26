@@ -6,37 +6,27 @@
 #include "vector"
 #include "utility"
 #include "exceptions.hpp"
+#include "sstream"
 
-namespace lieEngine {
+namespace lieEngine::core {
 
-    class base_object {
+    class [[maybe_unused]] base_object {
     protected:
         bool update_state;
         bool on_delete;
     public:
 
-        explicit base_object() {
-            update_state = true;
-            on_delete = false;
-        }
+        explicit base_object() : update_state(true), on_delete(false) {};
 
         virtual ~base_object() = default;
 
-        [[nodiscard]] bool isOnDelete() const {
-            return on_delete;
-        }
+        [[nodiscard]] virtual std::string serialize() const  = 0;
 
-        [[nodiscard]] bool isUpdate() const {
-            return update_state;
-        }
+        [[maybe_unused]] [[nodiscard]] bool isOnDelete() const { return on_delete; }
 
-        void setUpdate(bool state) {
-            update_state = state;
-        }
+        [[nodiscard]] bool isUpdate() const { return update_state; }
 
-        virtual void update(double time) = 0;
-
-        virtual std::string serialize() = 0;
+        [[maybe_unused]] void setUpdateState(bool state) { update_state = state; }
     };
 
 } // namespace lieEngine
